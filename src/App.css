@@ -1,38 +1,79 @@
-.App {
-  text-align: center;
+.modal-body{
+  background-color: rgb(30,30,40)
+}
+ html,body{ background-color: rgb(30,30,40) !important;
+display: flex;
+min-height: 100vh;
+flex-direction: column;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+a{
+  text-decoration: none;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+button{
+  margin-top:4px;
+}
+#users{
+font-size:11px}
+.bg-dark{background-color:rgb(24,24,32) !important;height: 100%}
+.card-header{background-color:rgba(0,0,0,0.15)}
+.card-middle {
+  -ms-transform: scale(1.1); 
+  -webkit-transform: scale(1.1); 
+  transform: scale(1.1);
+}	
+.card:hover {
+  -ms-transform: scale(1.12); 
+  -webkit-transform: scale(1.12); 
+  transform: scale(1.12);
+  transition-duration: 0.25s;
+}
+.shard-button{
+  width: 45px !important;
+  height: 45px !important;
+
+}
+.inner-card{background-color:rgba(0,0,0,0.07)}
+
+content{
+  flex: 1;
+}
+@media (min-width:992px) {
+  .container-fluid { width: 75% !important;}
+}
+@media (max-width:992px) {
+  .modal-dialog {max-width: 90%; }
+}
+.footer{
+  margin-top:100px
+}
+.minimize-btn{
+  height:25px;
+  width:25px;
+  position: absolute;
+     top: 5px;
+     right: 5px;
+}
+.modal-header {
+    border-bottom: 0 none;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+.modal-footer {
+  border-top: 0 none;
 }
-
-.App-link {
-  color: #61dafb;
+.rectangle{
+  width:12px;
+  height:1px;
+  background-color: white;
+  position:absolute;
+  left:6px;
+  bottom:3px;
 }
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.navbar{
+  background-color:rgb(24,24,32)
+}
+.white-icon{
+  -webkit-filter: invert(1);
+  filter: invert(1);
 }
