@@ -1,3 +1,4 @@
+import Container from 'react-bootstrap/Container'
 
 function  Premium(){
     return (
@@ -19,7 +20,10 @@ function  Premium(){
                                 <h1><b>$5 </b><small className="text-muted">/ mo</small></h1>
                                 <ul className="my-4 mb-4">
                                     <li>KDBot premium for 1 Discord guilds you own or moderate</li>
-                                </ul> <button type="button" className="btn btn-lg btn-block btn-success" onclick="location.href='https://www.patreon.com/join/kdbase/checkout?rid=3151036'">Join</button>
+                                </ul> 
+                                <div class="d-grid gap-2">
+                                    <button type="button" className="btn btn-lg btn-block btn-success" onclick="location.href='https://www.patreon.com/join/kdbase/checkout?rid=3151036'">Join</button>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -32,7 +36,10 @@ function  Premium(){
                                 <h1><b>$7 </b><small className="text-muted">/ mo</small></h1>
                                 <ul className="my-4 mb-4">
                                     <li>KDBot premium for 3 Discord guilds you own or moderate</li>
-                                </ul> <button type="button" className="btn btn-lg btn-block btn-success" onclick="location.href='https://www.patreon.com/join/kdbase/checkout?rid=5382119'">Join</button>
+                                </ul> 
+                                <div class="d-grid gap-2">
+                                    <button type="button" className="btn btn-lg btn-block btn-success" onclick="location.href='https://www.patreon.com/join/kdbase/checkout?rid=5382119'">Join</button>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -45,29 +52,34 @@ function  Premium(){
                                 <h1><b>$10 </b><small className="text-muted">/ mo</small></h1>
                                 <ul className="my-4 mb-4">
                                     <li>KDBot premium for 5 Discord guilds you own or moderate</li>
-                                </ul> <button type="button" className="btn btn-lg btn-block btn-success" onclick="location.href='https://www.patreon.com/join/kdbase/checkout?rid=3954908'">Join</button>
+                                </ul> 
+                                <div class="d-grid gap-2">
+                                    <button type="button" className="btn btn-lg btn-block btn-success" onclick="location.href='https://www.patreon.com/join/kdbase/checkout?rid=3954908'">Join</button>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
+
                 <div className = "row text-white md-5">
                     <div className = "col">
                         <h1 className = "display-4 text-center">Features</h1>
+                        <hr/>
                     </div>
                 </div>
                 <div className = "row text-white my-4">
                     <div className = "col">
-                        <div className="media">
-                        <img src="icons/hdd.svg" className="white-icon" width="32" height="32" alt="..."/>
-                        <div className="media-body">
-                            <h5 className="mt-0 fw-bold">Dedicated Instance</h5>
-                            KDBot Premium is a separate bot from the main bot that runs on a separate cloud server in order to offer maximum availability for our users. Having a separate instance also enables you to have KDBot and KDBot Premium in the same server, allowing for usage in two voice channels separately. 
-                        </div>
+                        <div className="media d-flex">
+                            <img src="icons/hdd.svg" className="white-icon me-2" width="32" height="32" alt="..."/>
+                            <div className="media-body">
+                                <h5 className="mt-0 fw-bold">Dedicated Instance</h5>
+                                KDBot Premium is a separate bot from the main bot that runs on a separate cloud server in order to offer maximum availability for our users. Having a separate instance also enables you to have KDBot and KDBot Premium in the same server, allowing for usage in two voice channels separately. 
+                            </div>
                         </div>
                     </div>
                     <div className = "col">
-                        <div className="media">
-                        <img src="icons/volume-up-fill.svg" className="white-icon" width="32" height="32" alt="..."/>
+                        <div className="media d-flex">
+                        <img src="icons/volume-up-fill.svg" className="white-icon me-2" width="32" height="32" alt="..."/>
                         <div className="media-body">
                             <h5 className="mt-0 fw-bold">Access to 15 Amazon Polly voices</h5>
                             KDBot Premium provides access to additional voices from Amazon Polly. The following voices will be available with Premium: Lea, Vicki, Raveena, Aditi, Mizuki, Takumi, Seoyeon, Liv, Ines, Cristiano, Maxim, Astrid, Filiz, Joanna, Matthew
@@ -77,8 +89,8 @@ function  Premium(){
                 </div>
                 <div className = "row text-white my-4">
                     <div className = "col">
-                        <div className="media">
-                        <img src="icons/code-slash.svg" className="white-icon" width="32" height="32" alt="..."/>
+                        <div className="media d-flex">
+                        <img src="icons/code-slash.svg" className="white-icon me-2" width="32" height="32" alt="..."/>
                         <div className="media-body">
                             <h5 className="mt-0 fw-bold">SSML Support</h5>
                             Support for SSML, speech synthesis markup language, is provided with Premium. SSML allows you to use tags to modify text-to-speech output, such as adding pauses, changing speed and pitch, etc. Documentation for SSML tags <a href = "https://docs.aws.amazon.com/polly/latest/dg/supportedtags.html">can be found here.</a> Please note that the  	&lt;speak&gt; 	&lt;/speak&gt; tags are added automatically. Use the command 'help ssml for more information
@@ -86,8 +98,8 @@ function  Premium(){
                         </div>		
                     </div>
                     <div className = "col">
-                        <div className="media">
-                        <img src="icons/hash.svg" className="white-icon" width="32" height="32" alt="..."/>
+                        <div className="media d-flex">
+                        <img src="icons/hash.svg" className="white-icon me-2" width="32" height="32" alt="..."/>
                         <div className="media-body">
                             <h5 className="mt-0 fw-bold">Ability to set dedicated TTS channel</h5>
                             You can now set a TTS text channel where anyone can use KDBot without requiring a prefix and the bot will speak the message if it is connected to a voice channel. Use the 'ttschannel command to set a TTS channel
@@ -96,6 +108,8 @@ function  Premium(){
                     </div>
                 </div>
                 <div className = "row text-white md-5">
+                <hr/>
+
                     <div className = "col ">
                         <h1 className = "display-4 text-center">How it works</h1>
                     </div>

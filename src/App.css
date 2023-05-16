@@ -6,11 +6,9 @@ display: flex;
 min-height: 100vh;
 flex-direction: column;
 }
-
 a{
   text-decoration: none;
 }
-
 button{
   margin-top:4px;
 }
@@ -35,7 +33,10 @@ font-size:11px}
 
 }
 .inner-card{background-color:rgba(0,0,0,0.07)}
-
+.btn-success{
+  background-color:#28a745 !important;
+  border-color:#28a745 !important;
+}
 content{
   flex: 1;
 }
@@ -58,7 +59,6 @@ content{
 .modal-header {
     border-bottom: 0 none;
 }
-
 .modal-footer {
   border-top: 0 none;
 }

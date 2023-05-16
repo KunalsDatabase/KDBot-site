@@ -4,6 +4,7 @@ import  React from 'react'
 import {createBrowserRouter,RouterProvider,redirect} from "react-router-dom"
 import LayOut from './Components/LayOut'
 import Premium from './routes/Premium'
+import Statistics from './routes/Statistics'
 const router = createBrowserRouter([
   {
     path: "/",
@@ -17,7 +18,7 @@ const router = createBrowserRouter([
       },
       {
         path: "statistics",
-        element: <div>Hello world!</div>,
+        element: <Statistics/>,
       },
       {
         path: "premium",
