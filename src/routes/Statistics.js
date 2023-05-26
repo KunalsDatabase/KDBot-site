@@ -1,9 +1,9 @@
+import BotStats from '../Components/BotStats'
 
 function  Statistics(){
  return (
     <>
-        hello
-    
+        <BotStats/>    
     </>
  )
 }
