@@ -14,7 +14,7 @@ function  Premium(){
             </Row>
             <Row className="justify-content-center py-4">
                 <Col md={3} xs={8} className = "mx-4 my-4">
-                    <Card bg="dark" text="light" className = " mb-4 box-shadow text-center">
+                    <Card bg="dark" text="light" className = " mb-4 box-shadow text-center premium-card">
                         <Card.Header>
                             <h4 className="my-0 font-weight-normal">KDBot Premium for 1</h4>
                         </Card.Header>
@@ -30,7 +30,7 @@ function  Premium(){
                     </Card>
                 </Col>
                 <Col md={3} xs={8} className = "mx-4 my-4">
-                    <Card bg="dark" text="light" className = "card-middle mb-4 box-shadow text-center">
+                    <Card bg="dark" text="light" className = "card-middle mb-4 box-shadow text-center premium-card">
                         <Card.Header>
                             <h4 className="my-0 font-weight-normal">KDBot Premium for 3</h4>
                         </Card.Header>
@@ -46,7 +46,7 @@ function  Premium(){
                     </Card>
                 </Col>
                 <Col md={3} xs={8} className = "mx-4 my-4">
-                    <Card bg="dark" text="light" className = "mb-4 box-shadow text-center">
+                    <Card bg="dark" text="light" className = "mb-4 box-shadow text-center premium-card">
                         <Card.Header>
                             <h4 className="my-0 font-weight-normal">KDBot Premium for 5</h4>
                         </Card.Header>

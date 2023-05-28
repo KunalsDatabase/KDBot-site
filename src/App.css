@@ -21,7 +21,7 @@ font-size:11px}
   -webkit-transform: scale(1.1); 
   transform: scale(1.1);
 }	
-.card:hover {
+.premium-card:hover {
   -ms-transform: scale(1.12); 
   -webkit-transform: scale(1.12); 
   transform: scale(1.12);
