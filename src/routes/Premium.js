@@ -23,7 +23,7 @@ function  Premium(){
                             <ul className="my-4 mb-4">
                                 <li>KDBot premium for 1 Discord guilds you own or moderate</li>
                             </ul> 
-                            <div class="d-grid gap-2">
+                            <div className="d-grid gap-2">
                                 <Button variant="success" size = "lg"  className="btn-block" href='https://www.patreon.com/join/kdbase/checkout?rid=3151036'>Join</Button>
                             </div>
                         </Card.Body>
@@ -39,7 +39,7 @@ function  Premium(){
                             <ul className="my-4 mb-4">
                                 <li>KDBot premium for 3 Discord guilds you own or moderate</li>
                             </ul> 
-                            <div class="d-grid gap-2">
+                            <div className="d-grid gap-2">
                                 <Button variant="success" size = "lg"  className="btn-block" href='https://www.patreon.com/join/kdbase/checkout?rid=5382119'>Join</Button>
                             </div>
                         </Card.Body>
@@ -55,7 +55,7 @@ function  Premium(){
                             <ul className="my-4 mb-4">
                                 <li>KDBot premium for 5 Discord guilds you own or moderate</li>
                             </ul> 
-                            <div class="d-grid gap-2">
+                            <div className="d-grid gap-2">
                                 <Button variant="success" size = "lg" className="btn-block" href='https://www.patreon.com/join/kdbase/checkout?rid=3954908'>Join</Button>
                             </div>
                         </Card.Body>

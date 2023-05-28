@@ -6,13 +6,13 @@ function  StatCards(){
 	
  return (
     <>
-		<div class = "row mt-2 row-eq-height">
+		<div className = "row mt-2 row-eq-height">
 			<StatCard Heading="Guilds" Value = {stats.guilds}/>
 			<StatCard Heading="Voice Clients" Value = {stats.voice}/>
 			<StatCard Heading="Latency" Value = {stats.latency}/>
 			<StatCard Heading="# of DB entries" Value = {stats.dbnum}/>
 		</div>
-		<div class = "row mt-2 row-eq-height">
+		<div className = "row mt-2 row-eq-height">
 			<StatCard Heading="Shards" Value ={stats.shards}/>
 			<StatCard Heading="Uptime" Value = {stats.uptime}/>
 			<StatCard Heading="Memory Usage" Value = {stats.memusage}/>
