@@ -1,9 +1,9 @@
-import BotStats from '../Components/BotStats'
+import StatCards from '../Components/StatCards'
 
 function  Statistics(){
  return (
     <>
-        <BotStats/>    
+        <StatCards/>    
     </>
  )
 }
