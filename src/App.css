@@ -77,3 +77,10 @@ content{
   -webkit-filter: invert(1);
   filter: invert(1);
 }
+.btn-dark:not(.btn-check:checked + .btn ):hover{
+
+  background-color: #21252963;
+  transition: 0.1s;
+  border-color: #21252963;
+
+}
