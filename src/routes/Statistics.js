@@ -6,14 +6,19 @@ import Container from 'react-bootstrap/Container'
 import DonateCard from '../Components/DonateCard'
 import UsageCard from '../Components/UsageCard'
 import Row from 'react-bootstrap/Row'
+import StatsPreprocess from '../Utils/StatsPreprocess'
 function  Statistics(){
     const [stats,setStats] = useState({})
+    const [aggregates,setAggregates] = useState([])
     useEffect(
         ()=>{
             const APIinterval=setInterval(()=>{
-                fetch("http://localhost/kdbot/botapi.php?botinfo")
+                fetch("http://192.168.0.62/kdbot/botapi.php?botinfo")
                 .then(res=>res.json())
-                .then(data=>setStats(data))
+                .then(stats=>{
+                    setAggregates(StatsPreprocess(stats))
+                    setStats(stats)
+                })
             }
             ,5000)
             return ()=>clearInterval(APIinterval)
@@ -21,16 +26,16 @@ function  Statistics(){
  return (
     <Container fluid>
         <Row className = "mt-2 row-eq-height">
-			<StatCard Heading="Guilds" Value = {stats.guilds}/>
-			<StatCard Heading="Voice Clients" Value = {stats.voice}/>
-			<StatCard Heading="Latency" Value = {stats.latency}/>
-			<StatCard Heading="# of DB entries" Value = {stats.dbnum}/>
+			<StatCard Heading="Guilds" Value = {aggregates.guilds}/>
+			<StatCard Heading="Voice Clients" Value = {aggregates.voice}/>
+			<StatCard Heading="Average Latency" Value = {aggregates.latency}/>
+			<StatCard Heading="# of DB entries" Value = {aggregates.dbnum}/>
         </Row>
         <Row className = "mt-2 row-eq-height">
-        <StatCard Heading="Shards" Value ={stats.shards}/>
-			<StatCard Heading="Uptime" Value = {stats.uptime}/>
-			<StatCard Heading="Memory Usage" Value = {stats.memusage}/>
-			<StatCard Heading="Characters used" Value = {stats.numchars}/>
+        <StatCard Heading="Shards" Value ={aggregates.shards}/>
+			<StatCard Heading="Uptime" Value = {aggregates.uptime}/>
+			<StatCard Heading="Memory Usage" Value = {aggregates.memusage}/>
+			<StatCard Heading="Characters used" Value = {aggregates.numchars}/>
         </Row>
         <Row className = "mt-2 row-eq-height">
             <ClusterCard/>
