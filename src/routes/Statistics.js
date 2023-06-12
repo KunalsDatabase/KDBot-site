@@ -12,7 +12,7 @@ function  Statistics(){
     const [aggregates,setAggregates] = useState([])
     useEffect(
         ()=>{
-            const APIinterval=setInterval(()=>{
+            function getData(){
                 fetch("http://192.168.0.62/kdbot/botapi.php?botinfo")
                 .then(res=>res.json())
                 .then(stats=>{
@@ -20,6 +20,8 @@ function  Statistics(){
                     setStats(stats)
                 })
             }
+            getData()
+            const APIinterval=setInterval(getData
             ,5000)
             return ()=>clearInterval(APIinterval)
         },[])
