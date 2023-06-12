@@ -8,7 +8,7 @@ import Collapse from 'react-bootstrap/Collapse'
 function  ClusterCard(){
 	const [open, setOpen] = useState(true)
  return (
-	<div class="col px-lg-1">
+	<div className="col px-lg-1">
 		<Card className="text-light bg-dark ">
 			<Card.Header className="text-center">
 				<Button variant = "dark" onClick={()=>setOpen(!open)} className="bg-dark text-white minimize-btn" aria-expanded={open} aria-controls="collapse"><div className ="rectangle"></div></Button>
