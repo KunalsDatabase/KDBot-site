@@ -40,7 +40,7 @@ function  Statistics(){
 			<StatCard Heading="Characters used" Value = {aggregates.numchars}/>
         </Row>
         <Row className = "mt-2 row-eq-height">
-            <ClusterCard/>
+            <ClusterCard stats = {stats}/>
         </Row>
 
         <Row className = "mt-2 row-eq-height">
