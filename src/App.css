@@ -28,8 +28,9 @@ font-size:11px}
   transition-duration: 0.25s;
 }
 .shard-button{
-  width: 45px !important;
-  height: 45px !important;
+  width: 52px !important;
+  height: 52px !important;
+  margin-left: 3px !important;
 
 }
 .inner-card{background-color:rgba(0,0,0,0.07)}
