@@ -1,3 +1,10 @@
+:root{
+  --bs-success:#28a745
+}
+.btn-success{
+  background-color: var(--bs-success);
+  border-color: var(--bs-success);
+}
 .modal-body{
   background-color: rgb(30,30,40)
 }
@@ -34,10 +41,7 @@ font-size:11px}
 
 }
 .inner-card{background-color:rgba(0,0,0,0.07)}
-.btn-success{
-  background-color:#28a745 !important;
-  border-color:#28a745 !important;
-}
+
 content{
   flex: 1;
 }
