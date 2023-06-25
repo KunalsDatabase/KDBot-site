@@ -1,4 +1,4 @@
-import Button from 'react-bootstrap/Button'
+import ShardButton from './ShardButton'
 import OverlayTrigger from 'react-bootstrap/OverlayTrigger'
 import Popover from 'react-bootstrap/Popover'
 function  Cluster({Title, Obj,HeatMapType}){
@@ -39,8 +39,7 @@ function  Cluster({Title, Obj,HeatMapType}){
 	const heatmap = calculateHeatMap(HeatMapType,Obj)
 	const shardButtons = []
 	for (let i = 0; i < Obj.shards.length; i++) {
-		//shardButtons.push(<ShardButton Title = {Title} Obj = {Obj} i = {i}/>)
-		let popover =    <Popover id="popover-basic">
+		let popover =    <Popover style = {{ position: "absolute"}}>
 			<Popover.Header as="h3">{Title+" Shard "+Obj.shards[i]}</Popover.Header>
 			<Popover.Body>
 				Latency: {Obj.latency[i]}ms<br/>
@@ -50,11 +49,9 @@ function  Cluster({Title, Obj,HeatMapType}){
 			</Popover.Body>
 	    </Popover>
 		shardButtons.push(
-		<OverlayTrigger overlay={popover}>
-			<Button variant="success" id="shard${obj+data[obj].shards[i]}" className ="shard-button text-white" style = {{"background-color":heatmap[i]}} data-toggle="modal" data-target="#${obj+data[obj].shards[i]}_modal">
+			<ShardButton color = {heatmap[i]} popover={popover}>
 				{Obj.shards[i]}
-			</Button>
-		</OverlayTrigger>)
+			</ShardButton>)
 	}
  return (
 	<>
