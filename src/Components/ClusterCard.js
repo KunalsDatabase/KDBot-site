@@ -29,7 +29,7 @@ function  ClusterCard({stats}){
 						<ToggleButton variant = "dark" id="memory" value={4} onClick={handleHeatmapChange}>Memory usage</ToggleButton>
 					</ToggleButtonGroup>
 					{Object.keys(stats).map(key => 
-						<Cluster Title = {key} Obj = {stats[key]} HeatMapType = {heatmap}/>
+						<Cluster Title = {key} Obj = {stats[key]} HeatMapType = {heatmap} key = {key}/>
 					)}
 
 

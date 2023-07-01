@@ -1,6 +1,6 @@
 import ShardButton from './ShardButton'
-import OverlayTrigger from 'react-bootstrap/OverlayTrigger'
 import Popover from 'react-bootstrap/Popover'
+import Card from 'react-bootstrap/Card'
 function  Cluster({Title, Obj,HeatMapType}){
 	function calculateHeatMap (HeatMapType,obj) {
 		let btnColor
@@ -49,18 +49,19 @@ function  Cluster({Title, Obj,HeatMapType}){
 			</Popover.Body>
 	    </Popover>
 		shardButtons.push(
-			<ShardButton color = {heatmap[i]} popover={popover}>
+			<ShardButton color = {heatmap[i]} popover={popover} key = {i.toString()}>
 				{Obj.shards[i]}
-			</ShardButton>)
+			</ShardButton>
+		)
 	}
  return (
 	<>
-		<div class="card-header text-center">
+		<Card.Header className="text-center">
 			{Title}
-		</div>
-		<div class="card-body inner-card">
+		</Card.Header>
+		<Card.Body className="inner-card">
 			{shardButtons}
-		</div>
+		</Card.Body>
 	</>
 )}
 export default Cluster
