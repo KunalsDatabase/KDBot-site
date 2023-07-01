@@ -3,7 +3,7 @@ function StatsPreprocess(stats) {
     aggregates.guilds = getAggregate(stats,"guilds")
     aggregates.voice = getAggregate(stats,"voice_clients")
     aggregates.dbnum = getAggregate(stats,"db_num")
-    aggregates.shards = Object.entries(stats).reduce((sum, [key,value]) => sum + value.shards?value.shards.length:0, 0)
+    aggregates.shards = Object.entries(stats).reduce((sum, [key,value]) => {return sum += value.shards?value.shards.length:sum},0)
     aggregates.memusage = Math.round(getAggregate(stats,"memory_usage")/1024/1024)+"MB"
     aggregates.pollychars = getAggregate(stats,"pollychars")
     aggregates.translatechars = getAggregate(stats,"translatechars")
