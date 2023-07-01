@@ -10,7 +10,7 @@ const ShardButton = forwardRef((props,ref)=>{
 				variant="success"
 				id="shard${obj+data[obj].shards[i]}"
 				className ="shard-button text-white"
-				style = {{"background-color":props.color}}
+				style = {{"backgroundColor":props.color,"borderColor":props.color}}
 				data-toggle="modal" data-target="#${obj+data[obj].shards[i]}_modal"
 			>
 				{props.children}
