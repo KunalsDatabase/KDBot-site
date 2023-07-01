@@ -60,6 +60,7 @@ content{
   position: absolute;
      top: 5px;
      right: 5px;
+
 }
 .modal-header {
     border-bottom: 0 none;
@@ -71,9 +72,8 @@ content{
   width:12px;
   height:1px;
   background-color: white;
-  position:absolute;
-  left:6px;
-  bottom:3px;
+  margin-top: 10px;
+  margin-left:-5px;
 }
 .navbar{
   background-color:rgb(24,24,32)
