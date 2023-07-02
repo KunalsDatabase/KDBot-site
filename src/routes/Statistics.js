@@ -7,8 +7,11 @@ import DonateCard from '../Components/DonateCard'
 import UsageCard from '../Components/UsageCard'
 import Row from 'react-bootstrap/Row'
 import StatsPreprocess from '../Utils/StatsPreprocess'
+import MemoryPreprocess from '../Utils/MemoryPreprocess'
 function  Statistics(){
     const [stats,setStats] = useState({})
+    const [memory,setMemory] = useState({})
+    const [globalMemory,setGlobalMemory] = useState([])
     const [aggregates,setAggregates] = useState([])
     useEffect(
         ()=>{
@@ -19,6 +22,12 @@ function  Statistics(){
                     setAggregates(StatsPreprocess(stats))
                     setStats(stats)
                 })
+                fetch("http://192.168.0.62/kdbot/botapi.php?memory")
+                .then(res=>res.json())
+                .then(memoryData=>{
+                    setMemory(memoryData)
+                    setGlobalMemory(MemoryPreprocess(memoryData))
+                })               
             }
             getData()
             const APIinterval=setInterval(getData
@@ -44,14 +53,14 @@ function  Statistics(){
         </Row>
 
         <Row className = "mt-2 row-eq-height">
-            <MemoryCard/>
+            <MemoryCard Memory = {globalMemory}/>
         </Row>
 
         <Row className = "mt-2 row-eq-height">
             <DonateCard/>
             <UsageCard/>
         </Row>
-    </Container>
+     </Container>
  )
 }
 export default Statistics
