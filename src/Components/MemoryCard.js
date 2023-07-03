@@ -5,6 +5,7 @@ import React, { useRef, useEffect, useState } from 'react';
 import {Chart} from 'chart.js/auto'
 
 const options = {
+	responsive:true,
 	animation: {
 		duration:200,
 		easing:'linear'

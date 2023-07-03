@@ -92,3 +92,6 @@ content{
 .fade.popover{
   transition: opacity 0.3s ease-in;
 }
+canvas{
+  display:inline !important
+}
