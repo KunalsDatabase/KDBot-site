@@ -1,12 +1,10 @@
 import Button from 'react-bootstrap/Button' 
-import {forwardRef} from 'react'
 import OverlayTrigger from 'react-bootstrap/OverlayTrigger'
 
-const ShardButton = forwardRef((props,ref)=>{
- return (
+function ShardButton(props)
+{return (
 	<OverlayTrigger overlay={props.popover} placement = "top">
 			<Button
-				ref={ref}
 				variant="success"
 				id="shard${obj+data[obj].shards[i]}"
 				className ="shard-button text-white"
@@ -16,5 +14,5 @@ const ShardButton = forwardRef((props,ref)=>{
 				{props.children}
 			</Button>
 	</OverlayTrigger>
-)})
+)}
 export default ShardButton
