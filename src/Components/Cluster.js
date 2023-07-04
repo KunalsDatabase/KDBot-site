@@ -1,6 +1,6 @@
 import ShardButton from './ShardButton'
-import Popover from 'react-bootstrap/Popover'
 import Card from 'react-bootstrap/Card'
+import produceShardPopover from './ShardPopover'
 function  Cluster({Title, Obj,HeatMapType}){
 	function calculateHeatMap (HeatMapType,obj) {
 		let btnColor
@@ -39,15 +39,7 @@ function  Cluster({Title, Obj,HeatMapType}){
 	const heatmap = calculateHeatMap(HeatMapType,Obj)
 	const shardButtons = []
 	for (let i = 0; i < Obj.shards.length; i++) {
-		let popover =    <Popover style = {{ position: "absolute"}}>
-			<Popover.Header as="h3">{Title+" Shard "+Obj.shards[i]}</Popover.Header>
-			<Popover.Body>
-				Latency: {Obj.latency[i]}ms<br/>
-				Voice connections: {Obj.voice_clients[i]}<br/>
-				Guilds: {Obj.guilds[i]}<br/>
-				Uptime: {Math.floor(Obj.uptime[i]/1000/60/60)+"h, "+Math.floor(((Obj.uptime[i]/1000)%3600)/60)+"m, "+Math.floor((Obj.uptime[i]/1000)%60)+"s"}
-			</Popover.Body>
-	    </Popover>
+		let popover = produceShardPopover(Obj,Title,i)
 		shardButtons.push(
 			<ShardButton color = {heatmap[i]} popover={popover} key = {i.toString()}>
 				{Obj.shards[i]}
