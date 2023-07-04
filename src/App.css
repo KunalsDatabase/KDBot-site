@@ -95,3 +95,6 @@ content{
 canvas{
   display:inline !important
 }
+.modal-content{
+  background-color:transparent;
+}

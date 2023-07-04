@@ -6,11 +6,14 @@ function ShardButton(props)
 	<OverlayTrigger overlay={props.popover} placement = "top">
 			<Button
 				variant="success"
-				id="shard${obj+data[obj].shards[i]}"
+				id={props.shardID}
 				className ="shard-button text-white"
 				style = {{"backgroundColor":props.color,"borderColor":props.color}}
-				data-toggle="modal" data-target="#${obj+data[obj].shards[i]}_modal"
+				onClick={()=>{
+					props.onClick(props.shardID)
+				}}
 			>
+				{props.shardID}
 				{props.children}
 			</Button>
 	</OverlayTrigger>
