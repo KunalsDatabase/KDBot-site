@@ -5,10 +5,10 @@ import ShardModal from './ShardModal'
 import {useState} from 'react'
 function  Cluster({Title, Obj,HeatMapType}){
 	const [modalShow, setModalShow] = useState(false)
-	const [modalShardD, setModalShardID] = useState(false)
+	const [modalShardIndex, setModalShardIndex] = useState(false)
 	const handleButtonClick = (shardID) => {
 		setModalShow((prevModalShow) => !prevModalShow)
-		setModalShardID(shardID)
+		setModalShardIndex(shardID)
 	  }
 	function calculateHeatMap (HeatMapType,obj) {
 		let btnColor
@@ -49,7 +49,9 @@ function  Cluster({Title, Obj,HeatMapType}){
 	for (let i = 0; i < Obj.shards.length; i++) {
 		let popover = produceShardPopover(Obj,Title,i)
 		shardButtons.push(
-			<ShardButton onClick={handleButtonClick} color = {heatmap[i]} popover={popover} key={i.toString()} shardID = {Obj.shards[i]}/>
+			<ShardButton onClick={handleButtonClick} color = {heatmap[i]} popover={popover} key={i.toString()} shardIndex = {i}>
+				{Obj.shards[i]}
+			</ShardButton>
 		)
 	}
  return (
@@ -59,7 +61,7 @@ function  Cluster({Title, Obj,HeatMapType}){
 		</Card.Header>
 		<Card.Body className="inner-card">
 			{shardButtons}
-			<ShardModal show={modalShow} onHide={() => setModalShow(false)} shardid = {modalShardD} title = {Title} obj = {Obj} />
+			<ShardModal show={modalShow} onHide={() => setModalShow(false)} shardindex = {modalShardIndex} title = {Title} obj = {Obj} />
 		</Card.Body>
 	</>
 )}
