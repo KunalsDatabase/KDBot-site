@@ -55,7 +55,7 @@ function  Statistics(){
 
         <Row className = "mt-2 row-eq-height">
             <DonateCard/>
-            <UsageCard/>
+            <UsageCard pollychars = {aggregates.pollychars} translatechars = {aggregates.translatechars} IVONAchars = {aggregates.IVONAchars}/>
         </Row>
 
      </Container>
