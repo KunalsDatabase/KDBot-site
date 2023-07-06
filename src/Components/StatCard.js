@@ -1,16 +1,15 @@
+import Card from 'react-bootstrap/Card'
 function  StatCard({Heading, Value}){
  return (
-
 	<div className= "col px-lg-1">
-		<div className="card text-light text-center bg-dark">
-			<div className="card-header">{Heading}</div>
-			<div className="card-body">
-			<p className="card-text">
-				{Value||"Loading..."}
-			</p>
-			</div>
-		</div>
+		<Card text = "light" className="text-center bg-dark">
+			<Card.Header>{Heading}</Card.Header>
+			<Card.Body>
+				<Card.Text>
+					{Value!==undefined?Value:"Loading..."}
+				</Card.Text>
+			</Card.Body>
+		</Card>
 	</div>
-    
 )}
 export default StatCard
