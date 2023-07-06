@@ -5,7 +5,7 @@ import ToggleButtonGroup from 'react-bootstrap/ToggleButtonGroup'
 import ToggleButton from 'react-bootstrap/ToggleButton'
 import Button from 'react-bootstrap/Button'
 import Collapse from 'react-bootstrap/Collapse'
-function  ClusterCard({stats}){
+function  ClusterCard({stats,memory}){
 	const [open, setOpen] = useState(true)
 	const [heatmap, setHeatmap] = useState("online")
 	function handleHeatmapChange(e){
@@ -29,7 +29,7 @@ function  ClusterCard({stats}){
 						<ToggleButton variant = "dark" id="memory" value={4} onClick={handleHeatmapChange}>Memory usage</ToggleButton>
 					</ToggleButtonGroup>
 					{Object.keys(stats).map(key => 
-						<Cluster Title = {key} Obj = {stats[key]} HeatMapType = {heatmap} key = {key}/>
+						<Cluster Title = {key} Obj = {stats[key]} memory={memory[key]} HeatMapType = {heatmap} key = {key}/>
 					)}
 
 

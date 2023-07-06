@@ -3,7 +3,7 @@ import Card from 'react-bootstrap/Card'
 import produceShardPopover from './ShardPopover'
 import ShardModal from './ShardModal'
 import {useState} from 'react'
-function  Cluster({Title, Obj,HeatMapType}){
+function  Cluster({Title, Obj,HeatMapType,memory}){
 	const [modalShow, setModalShow] = useState(false)
 	const [modalShardIndex, setModalShardIndex] = useState(false)
 	const handleButtonClick = (shardID) => {
@@ -39,6 +39,7 @@ function  Cluster({Title, Obj,HeatMapType}){
 					btnColor="hsla("+(134-134*((isNaN(memval) || !isFinite(memval))?0:memval))+", 61%, 41%, 1)"
 				
 				break
+				//no default
 			}
 			heatmap[i]=btnColor
 		}
@@ -61,7 +62,7 @@ function  Cluster({Title, Obj,HeatMapType}){
 		</Card.Header>
 		<Card.Body className="inner-card">
 			{shardButtons}
-			<ShardModal show={modalShow} onHide={() => setModalShow(false)} shardindex = {modalShardIndex} title = {Title} obj = {Obj} />
+			<ShardModal show={modalShow} onHide={() => setModalShow(false)} memory = {memory[modalShardIndex]} shardindex = {modalShardIndex} title = {Title} obj = {Obj} />
 		</Card.Body>
 	</>
 )}
