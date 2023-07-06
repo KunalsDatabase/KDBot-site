@@ -80,10 +80,13 @@ function ShardModal(props) {
         const usageChart = usageChartRef.current  
         memoryData.datasets[0].data.push(memory[memory.length-1])
         memoryData.datasets[0].data.shift(memory[0])
+        usageData.datasets[0].data[0]=cluster.pollychars[index]
+        usageData.datasets[0].data[1]=cluster.translatechars[index]
+        usageData.datasets[0].data[2]=cluster.IVONAchars[index]
 		memoryChart.update()
         usageChart.update()
 
-	  }, [index,props.memory])
+	  }, [props.show,props.memory])
     return (
       <Modal
         {...props}
