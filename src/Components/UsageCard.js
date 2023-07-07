@@ -1,6 +1,7 @@
 import {useRef, useEffect} from 'react'
 import {Chart} from 'chart.js/auto'
-
+import Col from 'react-bootstrap/Col'
+import Card from 'react-bootstrap/Card'
 const data = {
     labels: ["Amazon Polly Queries","Google Translate Queries","IVONA Queries"],
     datasets: [{
@@ -34,16 +35,16 @@ function  UsageCard({IVONAchars,translatechars,pollychars}){
 	},[IVONAchars,translatechars,pollychars])
 
 	return (
-		<div className= "col px-lg-1">
-			<div className="card text-light text-center bg-dark">
-				<div className="card-header">Usage by service</div>
-				<div className="card-body">
-				<p className="card-text">
+		<Col className= "px-lg-1">
+			<Card text="white" className="text-center bg-dark">
+				<Card.Header>Usage by service</Card.Header>
+				<Card.Body>
+				<Card.Text className="usagecard">
 					<canvas id="pieChart" ref={chartRef}></canvas>
-				</p>
-				</div>
-			</div>
-		</div>
+				</Card.Text>
+				</Card.Body>
+			</Card>
+		</Col>
 	)
 }
 export default UsageCard

@@ -62,6 +62,8 @@ function ShardModal(props) {
         memoryData.labels = x
 		if (!(memoryChartRef.current instanceof Chart)) {
 			memoryData.datasets[0].data = memory
+            memoryOptions.scales.y.suggestedMin = Math.max(...memory)-(Math.max(...memory)-Math.min(...memory))*20
+			memoryOptions.scales.y.suggestedMax = Math.max(...memory)+(Math.max(...memory)-Math.min(...memory))*10
 			memoryChartRef.current = new Chart(memoryChartRef.current, {
 			  type: 'line',
 			  options: memoryOptions,
@@ -90,7 +92,7 @@ function ShardModal(props) {
     return (
       <Modal
         {...props}
-        size="lg"
+        size="xl"
         aria-labelledby="contained-modal-title-vcenter"
         centered
         restoreFocus={false}
@@ -115,11 +117,11 @@ function ShardModal(props) {
                     <StatCard Heading = "Characters Used" Value = {cluster.pollychars[index]+cluster.translatechars[index]+cluster.IVONAchars[index]}/>
                 </Row>
                 <Row>
-                    <Col>
-                        <canvas id="shardMemoryChart" ref={memoryChartRef}></canvas>
+                    <Col xxl={8}>
+                        <canvas id="shardMemoryChart" className = "mt-3" ref={memoryChartRef}></canvas>
                     </Col>
-                    <Col>
-                        <canvas id="shardUsageChart" ref={usageChartRef}></canvas>
+                    <Col xxl={4}>
+                        <canvas id="shardUsageChart" className = "mt-3" ref={usageChartRef}></canvas>
                     </Col>
 
                 </Row>

@@ -45,9 +45,8 @@ function  MemoryCard(props){
 	 }
 	 data.labels = labels
 	  useEffect(() => {
-		const chart = chartRef.current
 		if(props.Memory.length===0) return
-		if (!(chart instanceof Chart)) {
+		if (!(chartRef.current instanceof Chart)) {
 			/*max and min are used to set the y axis range, so that the graph doesn't look weird when the memory usage is low or high.
 			This maintains a max value that is 20x the difference between the min and max values and a min value that is 10x the difference between the min and max values, allowing
 			the line to sit in the upper 2/3 of the graph
@@ -60,8 +59,8 @@ function  MemoryCard(props){
 			  options: options,
 			  data: data
 			})
-			return
 		  }
+		const chart = chartRef.current
 		data.datasets[0].data.push(props.Memory[props.Memory.length-1])
 		data.datasets[0].data.shift(props.Memory[0])
 		chart.update()

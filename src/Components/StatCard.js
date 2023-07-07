@@ -1,7 +1,8 @@
 import Card from 'react-bootstrap/Card'
+import Col from 'react-bootstrap/Col'
 function  StatCard({Heading, Value}){
  return (
-	<div className= "col px-lg-1">
+	<Col xs={6} lg={3} className= "px-lg-1 mt-1">
 		<Card text = "light" className="text-center bg-dark">
 			<Card.Header>{Heading}</Card.Header>
 			<Card.Body>
@@ -10,6 +11,6 @@ function  StatCard({Heading, Value}){
 				</Card.Text>
 			</Card.Body>
 		</Card>
-	</div>
+	</Col>
 )}
 export default StatCard
