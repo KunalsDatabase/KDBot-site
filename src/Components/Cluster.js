@@ -10,7 +10,7 @@ function  Cluster({Title, Obj,HeatMapType,memory}){
 		setModalShow((prevModalShow) => !prevModalShow)
 		setModalShardIndex(shardID)
 	  }
-	function calculateHeatMap (HeatMapType,obj) {
+	function calculateHeatMap (HeatMapType,Obj) {
 		let btnColor
 		const heatmap = []
 		const maxVoice = Math.max(...Obj.voice_clients)

@@ -7,12 +7,12 @@ import Premium from './routes/Premium'
 import Statistics from './routes/Statistics'
 const router = createBrowserRouter([
   {
-    path: "/",
+    path: "/kdbot",
     element: <LayOut/>,
     children: [{
         index:true,
         loader: async () => {
-          return redirect("/statistics")
+          return redirect("/kdbot/statistics")
         },
         element: <div>Stats!</div>,
       },
@@ -26,7 +26,7 @@ const router = createBrowserRouter([
       },
       {
         path: "*",
-        element: <div>Not Found</div>,
+        element: <Statistics/>,
       }
     ]
   }
@@ -35,9 +35,7 @@ const router = createBrowserRouter([
 function App() {
   return (
     <div className="App">
-      <React.StrictMode>
         <RouterProvider router={router}/>
-      </React.StrictMode>
     </div>
   )
 }

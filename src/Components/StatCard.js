@@ -7,7 +7,7 @@ function  StatCard({Heading, Value}){
 			<Card.Header>{Heading}</Card.Header>
 			<Card.Body>
 				<Card.Text>
-					{Value!==undefined?Value:"Loading..."}
+					{Value===null?"N/A":(Value!==undefined?Value:"Loading...")}
 				</Card.Text>
 			</Card.Body>
 		</Card>

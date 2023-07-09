@@ -107,7 +107,7 @@ function ShardModal(props) {
                 <Row>
                     <StatCard Heading = "Guilds" Value = {cluster.guilds[index]}/>
                     <StatCard Heading = "Voice Clients" Value = {cluster.voice_clients[index]}/>
-                    <StatCard Heading = "Latency" Value = {cluster.latency[index]+"ms"||"N/A"}/>
+                    <StatCard Heading = "Latency" Value = {cluster.latency[index]?cluster.latency[index]+"ms":"N/A"}/>
                     <StatCard Heading = "# of DB Entries" Value = {cluster.db_num[index]}/>
                 </Row>
                 <Row>

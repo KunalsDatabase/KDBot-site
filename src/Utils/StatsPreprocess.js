@@ -33,5 +33,4 @@ function getAggregate(data,property,avg=false){
     return temp
 }
 
-
-module.exports = StatsPreprocess
+export default StatsPreprocess

@@ -10,11 +10,7 @@ function parseMemoryData(memory){
             }
         }
     }
-   /* const x = []
-    for(var i = 0;i<globalMemory.length;i++){
-        x[globalMemory.length-i-1]=i*updateFrequency
-    }*/
     return globalMemory
 }
 
-module.exports = parseMemoryData
+export default parseMemoryData
