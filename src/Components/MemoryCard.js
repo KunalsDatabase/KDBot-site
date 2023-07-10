@@ -14,7 +14,6 @@ const options = {
 		y: {
 			ticks: {
 				stepSize: 20,
-				
 			}
 		}
 	   },
@@ -27,7 +26,6 @@ const options = {
 	}
   }
 const labels = []
-
 const data = {
 	labels,
 	datasets: [
@@ -35,8 +33,7 @@ const data = {
 		label: 'Memory usage over the last 2 minutes',
 		borderColor: '#0d6efd',
 		backgroundColor: '#0d6efd'
-	}
-	]
+	}]
 }
 function  MemoryCard(props){
 	const chartRef = useRef(null) 
@@ -64,7 +61,6 @@ function  MemoryCard(props){
 		data.datasets[0].data.push(props.Memory[props.Memory.length-1])
 		data.datasets[0].data.shift(props.Memory[0])
 		chart.update()
-		
 	  }, [props.Memory])
 
 	const [open, setOpen] = useState(true)

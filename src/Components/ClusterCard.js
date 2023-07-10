@@ -31,9 +31,6 @@ function  ClusterCard({stats,memory}){
 					{Object.keys(stats).map(key => 
 						<Cluster Title = {key} Obj = {stats[key]} memory={memory[key]} HeatMapType = {heatmap} key = {key}/>
 					)}
-
-
-
 				</Card.Body>
 			</Collapse>
 		</Card>

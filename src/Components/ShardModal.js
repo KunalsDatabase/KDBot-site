@@ -13,7 +13,6 @@ const usageData = {
         label: "TTS characters used",
         backgroundColor: ['rgba(255, 0, 0, 0.4)','rgba(0, 255, 0, 0.4)','rgba(0, 0, 255, 0.4)'],
         borderColor: ['rgb(0,0,0,0)','rgb(0,0,0,0)','rgb(0,0,0,0)']
-        
     }] 
 }
 
@@ -34,7 +33,6 @@ const memoryOptions = {
         y: {
             ticks: {
                 stepSize: 100,
-                
             }
         }
     },
@@ -95,8 +93,7 @@ function ShardModal(props) {
         size="xl"
         aria-labelledby="contained-modal-title-vcenter"
         centered
-        restoreFocus={false}
-      >
+        restoreFocus={false}>
         <Modal.Header closeButton closeVariant="white" className="text-white bg-dark">
           <Modal.Title id="contained-modal-title-vcenter">
             {props.title+" Shard "+cluster.shards[index]} Analytics
@@ -123,7 +120,6 @@ function ShardModal(props) {
                     <Col xxl={4}>
                         <canvas id="shardUsageChart" className = "mt-3" ref={usageChartRef}></canvas>
                     </Col>
-
                 </Row>
             </Container>
         </Modal.Body>

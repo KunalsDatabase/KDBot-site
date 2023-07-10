@@ -11,8 +11,7 @@ function ShardButton(props)
 				style = {{"backgroundColor":props.color,"borderColor":props.color}}
 				onClick={()=>{
 					props.onClick(props.shardIndex)
-				}}
-			>
+				}}>
 				{props.children}
 			</Button>
 	</OverlayTrigger>
