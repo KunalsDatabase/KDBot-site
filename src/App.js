@@ -3,8 +3,10 @@ import './App.css'
 import  React from 'react'
 import {createBrowserRouter,RouterProvider,redirect} from "react-router-dom"
 import LayOut from './Components/LayOut'
-import Premium from './routes/Premium'
-import Statistics from './routes/Statistics'
+import {Suspense} from 'react'
+const Premium = React.lazy(() => import('./routes/Premium'))
+const Statistics = React.lazy(() => import('./routes/Statistics'))
+const StatisticsLazy = <Suspense fallback={<div>Loading...</div>}><Statistics/></Suspense>
 const router = createBrowserRouter([
   {
     path: "/kdbot",
@@ -14,19 +16,22 @@ const router = createBrowserRouter([
         loader: async () => {
           return redirect("/kdbot/statistics")
         },
-        element: <div>Stats!</div>,
+        element: StatisticsLazy,
       },
       {
         path: "statistics",
-        element: <Statistics/>,
+        element: StatisticsLazy,
       },
       {
         path: "premium",
-        element: <Premium/>,
+        element:
+        <Suspense fallback={<div>Loading...</div>}>
+          <Premium/>
+        </Suspense>,
       },
       {
         path: "*",
-        element: <Statistics/>,
+        element: StatisticsLazy,
       }
     ]
   }
