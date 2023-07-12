@@ -15,7 +15,7 @@ function  Cluster({Title, Obj,HeatMapType,memory}){
 		const heatmap = []
 		const maxVoice = Math.max(...Obj.voice_clients)
 		const maxMemory = Math.max(...Obj.memory_usage)
-		for(var i=0;i<Obj.shards.length;i++){
+		for(let i=0;i<Obj.shards.length;i++){
 			if(HeatMapType!=="online" && Obj.wsstatus[i]!==0) btnColor="var(--bs-secondary)"
 			else switch(HeatMapType){
 				case "online":

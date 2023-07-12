@@ -22,7 +22,6 @@ function  LayOut(){
         <div className = "footer bg-dark text-left">
             <span className="text-muted">Copyright ©️{new Date().getFullYear()} Kunal's Database</span>
 	    </div>
-    
     </>
  )
 }

@@ -1,7 +1,7 @@
 import Collapse from 'react-bootstrap/Collapse'
 import Button from 'react-bootstrap/Button'
 import Card from 'react-bootstrap/Card'
-import React, { useRef, useEffect, useState } from 'react';
+import React, { useRef, useEffect, useState } from 'react'
 import {Chart} from 'chart.js/auto'
 
 const options = {
@@ -36,6 +36,7 @@ const data = {
 	}]
 }
 function  MemoryCard(props){
+	const [open, setOpen] = useState(true)
 	const chartRef = useRef(null) 
 	for(let i = 0;i<props.Memory.length;i++){
 		labels[props.Memory.length-i-1]=i*5
@@ -63,7 +64,6 @@ function  MemoryCard(props){
 		chart.update()
 	  }, [props.Memory])
 
-	const [open, setOpen] = useState(true)
  return (
 	<div className= "col-12 px-lg-1">
 		<Card className="text-light bg-dark">
