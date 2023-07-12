@@ -71,7 +71,7 @@ function  Statistics(){
         </Row>
 
         <Row className = "mt-2 row-eq-height">
-            <ClusterCard stats = {stats} memory={memory}/>
+            <ClusterCard stats = {stats} aggregates={aggregates} memory={memory}/>
         </Row>
 
         <Row className = "mt-2 row-eq-height">

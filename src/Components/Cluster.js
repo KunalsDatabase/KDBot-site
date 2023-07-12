@@ -3,7 +3,7 @@ import Card from 'react-bootstrap/Card'
 import produceShardPopover from './ShardPopover'
 import ShardModal from './ShardModal'
 import {useState} from 'react'
-function  Cluster({Title, Obj,HeatMapType,memory}){
+function  Cluster({Title, Obj,HeatMapType,memory,highlightShard}){
 	const [modalShow, setModalShow] = useState(false)
 	const [modalShardIndex, setModalShardIndex] = useState(false)
 	const handleButtonClick = (shardID) => {
@@ -50,7 +50,7 @@ function  Cluster({Title, Obj,HeatMapType,memory}){
 	for (let i = 0; i < Obj.shards.length; i++) {
 		let popover = produceShardPopover(Obj,Title,i)
 		shardButtons.push(
-			<ShardButton onClick={handleButtonClick} color = {heatmap[i]} popover={popover} key={i.toString()} shardIndex = {i}>
+			<ShardButton onClick={handleButtonClick} color = {heatmap[i]} popover={popover} isHighlighted={highlightShard===Obj.shards[i]} key={i.toString()} shardIndex = {i}>
 				{Obj.shards[i]}
 			</ShardButton>
 		)

@@ -1,18 +1,27 @@
 import Button from 'react-bootstrap/Button' 
 import OverlayTrigger from 'react-bootstrap/OverlayTrigger'
-
-function ShardButton(props)
-{return (
-	<OverlayTrigger overlay={props.popover} placement = "top">
+import {useRef,useEffect} from 'react'
+function ShardButton({popover,shardIndex,color,children,isHighlighted,onClick}){
+	let ref = useRef(null)
+	useEffect(()=>{
+		if(isHighlighted && ref.current){
+			ref.current.scrollIntoView({behavior: "smooth", block: "center", inline: "center"})
+			ref.current.focus()
+		}
+		
+	},[isHighlighted])
+	return(
+	<OverlayTrigger overlay={popover} placement = "top">
 			<Button
 				variant="success"
-				id={props.shardIndex}
+				id={shardIndex}
 				className ="shard-button text-white"
-				style = {{"backgroundColor":props.color,"borderColor":props.color}}
+				style = {{"backgroundColor":color,"borderColor":isHighlighted?"white":color,"border-width":"2px"}}
 				onClick={()=>{
-					props.onClick(props.shardIndex)
-				}}>
-				{props.children}
+					onClick(shardIndex)
+				}}
+				ref = {ref}>
+				{children}
 			</Button>
 	</OverlayTrigger>
 )}
