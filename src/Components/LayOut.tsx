@@ -9,8 +9,8 @@ function  LayOut(){
                 <img src="images/header.png" height="40px" alt=""/>
             </Navbar.Brand>
             <Navbar.Toggle/>
-            <Navbar.Collapse className = "justify-content-center" width="100%">
-                <Nav className="nav-pills" bg="dark">
+            <Navbar.Collapse className = "justify-content-center">
+                <Nav className="nav-pills">
                     <NavLink className="nav-link" to="statistics">Statistics</NavLink>
                     <NavLink className="nav-link" to="https://discordbots.org/bot/414925323197612032">Bot Page</NavLink>
                     <NavLink className="nav-link" to="https://discord.gg/xMh2YTb">Support Server</NavLink>

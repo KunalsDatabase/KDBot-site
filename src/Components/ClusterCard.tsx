@@ -8,16 +8,24 @@ import Row from 'react-bootstrap/Row'
 import Collapse from 'react-bootstrap/Collapse'
 import Col from 'react-bootstrap/Col'
 import Form from 'react-bootstrap/Form'
-function  ClusterCard({stats,memory,aggregates}){
-	const [open, setOpen] = useState(true)
-	const [heatmap, setHeatmap] = useState("online")
+import {Stats,Aggregates} from '../types'
+type ClusterCardProps = {
+	stats: Stats|null
+	memory: any
+	totalShards: number
+}
+
+function  ClusterCard({stats,memory,totalShards}:ClusterCardProps){
+	const [open, setOpen] = useState<boolean>(true)
+	const [heatmap, setHeatmap] = useState<string>("online")
 	const [highlightShard, setHighlightShard] = useState(NaN)
-	function handleHeatmapChange(e){
-		setHeatmap(e.target.htmlFor)
+	function handleHeatmapChange(e:any){
+		setHeatmap((e.currentTarget).htmlFor)
 	}
-	function handleSubmit(e){
+	function handleSubmit(e:React.FormEvent<HTMLFormElement>){
 		e.preventDefault()
-		e.target[0].value.length<18?setHighlightShard(NaN):setHighlightShard((Number(e.target[0].value) >> 22) % aggregates.shards)
+		const inputValue = (e.currentTarget[0] as HTMLInputElement).value
+		inputValue.length < 18 ? setHighlightShard(NaN) : setHighlightShard((Number(inputValue) >> 22) % totalShards)	
 	}
 		return (
 	<div className="col px-lg-1">
@@ -51,7 +59,7 @@ function  ClusterCard({stats,memory,aggregates}){
 					</Col>
 					</Row>
 					<Row>
-					{Object.keys(stats).map(key => 
+					{stats && memory && Object.keys(stats).map(key => 
 						<Cluster Title = {key} Obj = {stats[key]} memory={memory[key]} highlightShard={highlightShard} HeatMapType = {heatmap} key = {key}/>
 					)}
 					</Row>

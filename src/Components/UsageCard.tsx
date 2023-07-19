@@ -1,10 +1,11 @@
 import {useRef, useEffect} from 'react'
-import {Chart} from 'chart.js/auto'
+import {Chart,ChartData,ChartOptions} from 'chart.js/auto'
 import Col from 'react-bootstrap/Col'
 import Card from 'react-bootstrap/Card'
-const data = {
+const data:ChartData = {
     labels: ["Amazon Polly Queries","Google Translate Queries","IVONA Queries"],
     datasets: [{
+		data: [0,0,0],
         label: "TTS characters used",
         backgroundColor: ['rgba(255, 0, 0, 0.4)','rgba(0, 255, 0, 0.4)','rgba(0, 0, 255, 0.4)'],
         borderColor: ['rgb(0,0,0,0)','rgb(0,0,0,0)','rgb(0,0,0,0)']
@@ -12,11 +13,17 @@ const data = {
     }] 
 }
 
-const options = {
+const options:ChartOptions = {
     responsive:true,
 }
-function  UsageCard({IVONAchars,translatechars,pollychars}){
-	const chartRef = useRef(null) 
+type UsageCardProps = {
+	IVONAchars: number,
+	translatechars: number,
+	pollychars: number
+}
+
+function  UsageCard({IVONAchars,translatechars,pollychars}:UsageCardProps){
+	const chartRef = useRef<any>(null) 
 	useEffect(() => {
 		if(!chartRef.current) return
 		if(!(chartRef.current instanceof Chart)) {

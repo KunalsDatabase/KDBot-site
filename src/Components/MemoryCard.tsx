@@ -2,9 +2,9 @@ import Collapse from 'react-bootstrap/Collapse'
 import Button from 'react-bootstrap/Button'
 import Card from 'react-bootstrap/Card'
 import React, { useRef, useEffect, useState } from 'react'
-import {Chart} from 'chart.js/auto'
-
-const options = {
+import {Chart,ChartData,ChartOptions,LinearScaleOptions} from 'chart.js/auto'
+ 
+const options:ChartOptions = {
 	responsive:true,
 	animation: {
 		duration:200,
@@ -13,8 +13,11 @@ const options = {
 	scales: {
 		y: {
 			ticks: {
-				stepSize: 20,
-			}
+				stepSize: 20
+			},
+			suggestedMin: 0,
+			suggestedMax: 100
+			
 		}
 	   },
 
@@ -24,45 +27,46 @@ const options = {
 			tension:0
 		}
 	}
-  }
-const labels = []
-const data = {
+}
+const labels: number[] = []
+const data:ChartData= {
 	labels,
 	datasets: [
 	{
 		label: 'Memory usage over the last 2 minutes',
 		borderColor: '#0d6efd',
-		backgroundColor: '#0d6efd'
+		backgroundColor: '#0d6efd',
+		data: []
 	}]
 }
-function  MemoryCard(props){
+function  MemoryCard({memory}: {memory:number[]}){
 	const [open, setOpen] = useState(true)
-	const chartRef = useRef(null) 
-	for(let i = 0;i<props.Memory.length;i++){
-		labels[props.Memory.length-i-1]=i*5
+	const chartRef = useRef<any>(null) 
+	for(let i = 0;i<memory.length;i++){
+		labels[memory.length-i-1]=i*5
 	 }
 	 data.labels = labels
 	  useEffect(() => {
-		if(props.Memory.length===0) return
+		if(memory.length===0) return
 		if (!(chartRef.current instanceof Chart)) {
 			/*max and min are used to set the y axis range, so that the graph doesn't look weird when the memory usage is low or high.
 			This maintains a max value that is 20x the difference between the min and max values and a min value that is 10x the difference between the min and max values, allowing
 			the line to sit in the upper 2/3 of the graph
 			*/
-			options.scales.y.suggestedMin = Math.max(...props.Memory)-(Math.max(...props.Memory)-Math.min(...props.Memory))*20
-			options.scales.y.suggestedMax = Math.max(...props.Memory)+(Math.max(...props.Memory)-Math.min(...props.Memory))*10
-			data.datasets[0].data = props.Memory
-			chartRef.current = new Chart(chartRef.current, {
+			(options!.scales!.y as LinearScaleOptions).suggestedMin = Math.max(...memory)-(Math.max(...memory)-Math.min(...memory))*20;
+			(options!.scales!.y as LinearScaleOptions).suggestedMax = Math.max(...memory)+(Math.max(...memory)-Math.min(...memory))*10
+			data.datasets[0].data = memory
+			chartRef.current = new Chart(chartRef.current,{
 			  type: 'line',
 			  options: options,
 			  data: data
 			})
 		  }
 		const chart = chartRef.current
-		data.datasets[0].data.push(props.Memory[props.Memory.length-1])
-		data.datasets[0].data.shift(props.Memory[0])
+		data!.datasets[0]!.data!.push(memory[memory.length-1])
+		data!.datasets[0]!.data!.shift()
 		chart.update()
-	  }, [props.Memory])
+	  }, [memory])
 
  return (
 	<div className= "col-12 px-lg-1">

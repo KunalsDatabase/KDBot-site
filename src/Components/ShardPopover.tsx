@@ -1,7 +1,7 @@
 import Popover from 'react-bootstrap/Popover'
-//not technically a component but a helper function to generate a popover for a shardbutton, this is because overlaytrigger needs the popover component directly 
-function ShardPopover(Obj,Title,shardID)
-{
+//not technically a component but a helper function to generate a popover for a shardbutton, this is because overlaytrigger needs the popover component directly
+
+function ShardPopover(Obj:any,Title:string,shardID:number):JSX.Element{
     const popover = 
     <Popover style = {{ position: "absolute"}}>
          <Popover.Header as="h3">{Title+" Shard "+Obj.shards[shardID]}</Popover.Header>

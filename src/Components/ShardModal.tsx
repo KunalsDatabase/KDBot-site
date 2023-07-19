@@ -5,30 +5,32 @@ import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import StatCard from './StatCard'
 import {useRef,useEffect} from 'react'
-import {Chart} from 'chart.js/auto'
+import {Chart,ChartData,ChartOptions,LinearScaleOptions} from 'chart.js/auto'
 
-const usageData = {
+const usageData:ChartData = {
     labels: ["Amazon Polly Queries","Google Translate Queries","IVONA Queries"],
     datasets: [{
+        data: [0,0,0],
         label: "TTS characters used",
         backgroundColor: ['rgba(255, 0, 0, 0.4)','rgba(0, 255, 0, 0.4)','rgba(0, 0, 255, 0.4)'],
         borderColor: ['rgb(0,0,0,0)','rgb(0,0,0,0)','rgb(0,0,0,0)']
     }] 
 }
 
-const usageOptions = {
+const usageOptions:ChartOptions = {
     responsive:true,
 }
 
-const memoryData = {
+const memoryData:ChartData = {
     datasets: [{
+        data: [],
         label: 'Memory usage over last 2 minutes',
         backgroundColor: 'rgb(255, 255, 255)',
         borderColor: 'rgb(255, 255, 255)',
 }]
 }
 
-const memoryOptions = {
+const memoryOptions:ChartOptions = {
     scales: {
         y: {
             ticks: {
@@ -43,14 +45,19 @@ const memoryOptions = {
         }
     }
 }
+type ShardModalProps = {
+    shardindex: number,
+    obj: any,
+    memory: number[],
+    show: boolean,
+    title: string,
+    onHide: () => void
+}
 
-function ShardModal(props) {
-    const memoryChartRef = useRef(null)
-    const usageChartRef = useRef(null)
-    const index = props.shardindex
-    const cluster = props.obj
-    const memory = props.memory
-    const x = []
+function ShardModal({shardindex,obj: cluster,memory,title,...props}:ShardModalProps) {
+    const memoryChartRef = useRef<any>(null)
+    const usageChartRef = useRef<any>(null)
+    const x:number[] = []
     useEffect(() => {
 		if(!memoryChartRef.current || !usageChartRef.current) return
         if(!memory) return
@@ -59,9 +66,9 @@ function ShardModal(props) {
         }
         memoryData.labels = x
 		if (!(memoryChartRef.current instanceof Chart)) {
-			memoryData.datasets[0].data = memory
-            memoryOptions.scales.y.suggestedMin = Math.max(...memory)-(Math.max(...memory)-Math.min(...memory))*20
-			memoryOptions.scales.y.suggestedMax = Math.max(...memory)+(Math.max(...memory)-Math.min(...memory))*10
+			memoryData.datasets[0].data = memory;
+            (memoryOptions!.scales!.y as LinearScaleOptions).suggestedMin = Math.max(...memory)-(Math.max(...memory)-Math.min(...memory))*20;
+			(memoryOptions!.scales!.y as LinearScaleOptions).suggestedMax = Math.max(...memory)+(Math.max(...memory)-Math.min(...memory))*10
 			memoryChartRef.current = new Chart(memoryChartRef.current, {
 			  type: 'line',
 			  options: memoryOptions,
@@ -69,7 +76,7 @@ function ShardModal(props) {
 			})
 		  }
           if (!(usageChartRef.current instanceof Chart)) {
-			usageData.datasets[0].data = [cluster.pollychars[index],cluster.translatechars[index],cluster.IVONAchars[index]]
+			usageData.datasets[0].data = [cluster.pollychars[shardindex],cluster.translatechars[shardindex],cluster.IVONAchars[shardindex]]
 			usageChartRef.current = new Chart(usageChartRef.current, {
                 type: 'pie',
 			  options: usageOptions,
@@ -79,39 +86,40 @@ function ShardModal(props) {
         const memoryChart = memoryChartRef.current
         const usageChart = usageChartRef.current  
         memoryData.datasets[0].data.push(memory[memory.length-1])
-        memoryData.datasets[0].data.shift(memory[0])
-        usageData.datasets[0].data[0]=cluster.pollychars[index]
-        usageData.datasets[0].data[1]=cluster.translatechars[index]
-        usageData.datasets[0].data[2]=cluster.IVONAchars[index]
+        memoryData.datasets[0].data.shift()
+        usageData.datasets[0].data[0]=cluster.pollychars[shardindex]
+        usageData.datasets[0].data[1]=cluster.translatechars[shardindex]
+        usageData.datasets[0].data[2]=cluster.IVONAchars[shardindex]
 		memoryChart.update()
         usageChart.update()
 
-	  }, [props.show,props.memory])
+	  }, [props.show,memory])
     return (
       <Modal
         {...props}
         size="xl"
         aria-labelledby="contained-modal-title-vcenter"
         centered
-        restoreFocus={false}>
+        restoreFocus={false}
+        >
         <Modal.Header closeButton closeVariant="white" className="text-white bg-dark">
           <Modal.Title id="contained-modal-title-vcenter">
-            {props.title+" Shard "+cluster.shards[index]} Analytics
+            {title+" Shard "+cluster.shards[shardindex]} Analytics
           </Modal.Title>
         </Modal.Header>
         <Modal.Body className = "text-white">
             <Container>
                 <Row>
-                    <StatCard Heading = "Guilds" Value = {cluster.guilds[index]}/>
-                    <StatCard Heading = "Voice Clients" Value = {cluster.voice_clients[index]}/>
-                    <StatCard Heading = "Latency" Value = {cluster.latency[index]?cluster.latency[index]+"ms":"N/A"}/>
-                    <StatCard Heading = "# of DB Entries" Value = {cluster.db_num[index]}/>
+                    <StatCard Heading = "Guilds" Value = {cluster.guilds[shardindex]}/>
+                    <StatCard Heading = "Voice Clients" Value = {cluster.voice_clients[shardindex]}/>
+                    <StatCard Heading = "Latency" Value = {cluster.latency[shardindex]?cluster.latency[shardindex]+"ms":"N/A"}/>
+                    <StatCard Heading = "# of DB Entries" Value = {cluster.db_num[shardindex]}/>
                 </Row>
                 <Row>
-                    <StatCard Heading = "Websocket Status" Value = {cluster.wsstatus[index]===0?"Connected":"Not connected"}/>
-                    <StatCard Heading = "Uptime" Value = {Math.floor(cluster.uptime[index]/1000/60/60)+"h, "+Math.floor(((cluster.uptime[index]/1000)%3600)/60)+"m, "+Math.floor((cluster.uptime[index]/1000)%60)+"s"}/>
-                    <StatCard Heading = "Memory Usage" Value = {Math.round(cluster.memory_usage[index]/1024/1024)+"MB"}/>
-                    <StatCard Heading = "Characters Used" Value = {cluster.pollychars[index]+cluster.translatechars[index]+cluster.IVONAchars[index]}/>
+                    <StatCard Heading = "Websocket Status" Value = {cluster.wsstatus[shardindex]===0?"Connected":"Not connected"}/>
+                    <StatCard Heading = "Uptime" Value = {Math.floor(cluster.uptime[shardindex]/1000/60/60)+"h, "+Math.floor(((cluster.uptime[shardindex]/1000)%3600)/60)+"m, "+Math.floor((cluster.uptime[shardindex]/1000)%60)+"s"}/>
+                    <StatCard Heading = "Memory Usage" Value = {Math.round(cluster.memory_usage[shardindex]/1024/1024)+"MB"}/>
+                    <StatCard Heading = "Characters Used" Value = {cluster.pollychars[shardindex]+cluster.translatechars[shardindex]+cluster.IVONAchars[shardindex]}/>
                 </Row>
                 <Row>
                     <Col xxl={8}>

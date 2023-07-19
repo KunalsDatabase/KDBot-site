@@ -9,15 +9,21 @@ import Row from 'react-bootstrap/Row'
 import StatsPreprocess from '../Utils/StatsPreprocess'
 import MemoryPreprocess from '../Utils/MemoryPreprocess'
 import Alert from 'react-bootstrap/Alert'
+import { Aggregates,Stats,Memory} from "../types"
+type Error = {
+    heading: string
+    message: string
+}
 function  Statistics(){
-    const [stats,setStats] = useState({})
-    const [memory,setMemory] = useState({})
-    const [globalMemory,setGlobalMemory] = useState([])
-    const [aggregates,setAggregates] = useState([])
-    const [errorMessage,setErrorMessage] = useState("")
-    const [errorShow,setErrorShow] = useState(false)
-    function handleError(e){
-        setErrorMessage((prevState)=>{
+    const [stats,setStats] = useState<Stats | null>(null)
+    const [memory,setMemory] = useState<any>({})
+    const [globalMemory,setGlobalMemory] = useState<number[]>([])
+    const [aggregates,setAggregates] = useState<Aggregates | null>(null)
+    const [errorMessage,setErrorMessage] = useState({heading:"",message:""})
+    const [errorShow,setErrorShow] = useState<boolean>(false)
+
+    function handleError(e:Error){
+        setErrorMessage((prevState:Error)=>{
             if(prevState.message === e.message) return prevState //Prevent duplicate errors
             setErrorShow(true)
             return e
@@ -27,17 +33,17 @@ function  Statistics(){
             async function getData(){
                 try{
                     let [statsResponse,memoryResponse] = await Promise.all([fetch("http://kdbase.com/kdbot/botapi.php?botinfo"),fetch("http://kdbase.com/kdbot/botapi.php?memory")])
-                    let [stats,memoryData] = await Promise.all([statsResponse.json(),memoryResponse.json()])
-                    Object.entries(stats).forEach(function([key, value]) {
-                        if(Object.keys(stats[key]).length === 0){
-                            delete stats[key]
+                    let [statsData,memoryData] = await Promise.all([statsResponse.json(),memoryResponse.json()])
+                    Object.entries(statsData).forEach(function([key, value]) {
+                        if(Object.keys(statsData[key]).length === 0){
+                            delete statsData[key]
                             handleError({heading:"Cluster Error",message:"The cluster '"+key+"' is currently offline or in the process of restarting."})
                         }
                     })
                     setMemory(memoryData)
                     setGlobalMemory(MemoryPreprocess(memoryData))
-                    setAggregates(StatsPreprocess(stats))
-                    setStats(stats)
+                    setAggregates(StatsPreprocess(statsData))
+                    setStats(statsData)
 
                 }
                 catch(e){
@@ -57,30 +63,30 @@ function  Statistics(){
         </p>
       </Alert>}
         <Row className = "mt-2 row-eq-height">
-			<StatCard Heading="Guilds" Value = {aggregates.guilds}/>
-			<StatCard Heading="Voice Clients" Value = {aggregates.voice}/>
-			<StatCard Heading="Average Latency" Value = {aggregates.latency}/>
-			<StatCard Heading="# of DB entries" Value = {aggregates.dbnum}/>
+			<StatCard Heading="Guilds" Value = {aggregates?.guilds}/>
+			<StatCard Heading="Voice Clients" Value = {aggregates?.voice}/>
+			<StatCard Heading="Average Latency" Value = {aggregates?.latency}/>
+			<StatCard Heading="# of DB entries" Value = {aggregates?.dbnum}/>
         </Row>
 
         <Row className = "mt-2 row-eq-height">
-            <StatCard Heading="Shards" Value ={aggregates.shards}/>
-            <StatCard Heading="Uptime" Value = {aggregates.uptime}/>
-            <StatCard Heading="Memory Usage" Value = {aggregates.memusage}/>
-            <StatCard Heading="Characters used" Value = {aggregates.numchars}/>
+            <StatCard Heading="Shards" Value ={aggregates?.shards}/>
+            <StatCard Heading="Uptime" Value = {aggregates?.uptime}/>
+            <StatCard Heading="Memory Usage" Value = {aggregates?.memusage}/>
+            <StatCard Heading="Characters used" Value = {aggregates?.numchars}/>
         </Row>
 
         <Row className = "mt-2 row-eq-height">
-            <ClusterCard stats = {stats} aggregates={aggregates} memory={memory}/>
+            <ClusterCard stats = {stats} totalShards={aggregates?.shards||0} memory={memory}/>
         </Row>
 
         <Row className = "mt-2 row-eq-height">
-            <MemoryCard Memory = {globalMemory}/>
+            <MemoryCard memory = {globalMemory}/>
         </Row>
 
         <Row className = "mt-2 row-eq-height">
             <DonateCard/>
-            <UsageCard pollychars = {aggregates.pollychars} translatechars = {aggregates.translatechars} IVONAchars = {aggregates.IVONAchars}/>
+            <UsageCard pollychars = {aggregates?.pollychars||0} translatechars = {aggregates?.translatechars||0} IVONAchars = {aggregates?.IVONAchars||0}/>
         </Row>
 
      </Container>
