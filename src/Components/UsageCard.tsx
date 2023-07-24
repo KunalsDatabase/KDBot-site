@@ -1,4 +1,4 @@
-import {useRef, useEffect} from 'react'
+import {useRef, useEffect,useState} from 'react'
 import {Chart,ChartData,ChartOptions} from 'chart.js/auto'
 import Col from 'react-bootstrap/Col'
 import Card from 'react-bootstrap/Card'
@@ -23,22 +23,22 @@ type UsageCardProps = {
 }
 
 function  UsageCard({IVONAchars,translatechars,pollychars}:UsageCardProps){
-	const chartRef = useRef<any>(null) 
+	const chartRef = useRef<HTMLCanvasElement | null>(null) 
+	const [chart, setChart] = useState<Chart | null>(null)
 	useEffect(() => {
 		if(!chartRef.current) return
-		if(!(chartRef.current instanceof Chart)) {
+		if(!(chart)) {
 			data.datasets[0].data = [pollychars,translatechars,IVONAchars]
-			chartRef.current = new Chart(chartRef.current, {
+			setChart(new Chart(chartRef.current, {
                 type: 'pie',
 			  options: options,
 			  data: data
-			})
+			}))
 		}
-        const chart = chartRef.current  
         data.datasets[0].data[0]=pollychars
         data.datasets[0].data[1]=translatechars
         data.datasets[0].data[2]=IVONAchars
-        chart.update()
+        chart!.update()
 	},[IVONAchars,translatechars,pollychars])
 
 	return (

@@ -18,19 +18,13 @@ function StatsPreprocess(stats:Stats) {
     }
     return aggregates
 }
-function getAggregate(data:any,property:string,avg:boolean=false){
+function getAggregate(data:Stats,property:keyof Stat,avg:boolean=false){
     let temp = 0
     let n = 0
     for(let obj in data){
-      if(!Array.isArray(data[obj][property])){
-            temp = temp+data[obj][property]
-        n++
-         }
-        else{
-            temp = temp + data[obj][property].reduce((a:number, b:number) => a + b, 0)
-          n = n + data[obj][property].length
+        temp = temp + data[obj][property].reduce((a:number, b:number) => a + b, 0)
+        n = n + data[obj][property].length
       }
-    }
     if(avg){
       return temp/n
     }

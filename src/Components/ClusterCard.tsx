@@ -8,19 +8,18 @@ import Row from 'react-bootstrap/Row'
 import Collapse from 'react-bootstrap/Collapse'
 import Col from 'react-bootstrap/Col'
 import Form from 'react-bootstrap/Form'
-import {Stats,Aggregates} from '../types'
+import {Stats,Memory} from '../types'
 type ClusterCardProps = {
 	stats: Stats|null
-	memory: any
+	memory: Memory|null
 	totalShards: number
 }
-
 function  ClusterCard({stats,memory,totalShards}:ClusterCardProps){
 	const [open, setOpen] = useState<boolean>(true)
 	const [heatmap, setHeatmap] = useState<string>("online")
 	const [highlightShard, setHighlightShard] = useState(NaN)
-	function handleHeatmapChange(e:any){
-		setHeatmap((e.currentTarget).htmlFor)
+	function handleHeatmapChange(value:string){
+		setHeatmap(value)
 	}
 	function handleSubmit(e:React.FormEvent<HTMLFormElement>){
 		e.preventDefault()
@@ -40,11 +39,11 @@ function  ClusterCard({stats,memory,totalShards}:ClusterCardProps){
 					<p>Per-shard status of clusters. Hover over each shard for a preview of the shards' status. Click on a shard for more information.</p>
 						<Col xl={4} md={6}>
 					Heatmap type:&nbsp;&nbsp;&nbsp;&nbsp;
-					<ToggleButtonGroup type = "radio" name="heatmap" defaultValue={1}>
-						<ToggleButton variant = "dark" id="online" value={1} onClick={handleHeatmapChange}>Online  </ToggleButton>
-						<ToggleButton variant = "dark" id="voice_clients" value={2} onClick={handleHeatmapChange}>Voice Clients</ToggleButton>
-						<ToggleButton variant = "dark" id="latency" value={3} onClick={handleHeatmapChange}>Latency</ToggleButton>
-						<ToggleButton variant = "dark" id="memory" value={4} onClick={handleHeatmapChange}>Memory usage</ToggleButton>
+					<ToggleButtonGroup type = "radio" name="heatmap" defaultValue={"online"} onChange = {handleHeatmapChange}>
+						<ToggleButton variant = "dark" id="online" value={"online"}>Online  </ToggleButton>
+						<ToggleButton variant = "dark" id="voice_clients" value={"voice_clients"}>Voice Clients</ToggleButton>
+						<ToggleButton variant = "dark" id="latency" value={"latency"}>Latency</ToggleButton>
+						<ToggleButton variant = "dark" id="memory" value={"memory"}>Memory usage</ToggleButton>
 					</ToggleButtonGroup>
 					</Col>
 					</Row>

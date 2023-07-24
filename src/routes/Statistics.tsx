@@ -16,7 +16,7 @@ type Error = {
 }
 function  Statistics(){
     const [stats,setStats] = useState<Stats | null>(null)
-    const [memory,setMemory] = useState<any>({})
+    const [memory,setMemory] = useState<Memory | null>(null)
     const [globalMemory,setGlobalMemory] = useState<number[]>([])
     const [aggregates,setAggregates] = useState<Aggregates | null>(null)
     const [errorMessage,setErrorMessage] = useState({heading:"",message:""})

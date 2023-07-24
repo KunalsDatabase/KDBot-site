@@ -3,12 +3,12 @@ import Card from 'react-bootstrap/Card'
 import produceShardPopover from './ShardPopover'
 import ShardModal from './ShardModal'
 import {useState} from 'react'
-import {Memory,Stat} from '../types'
+import {MemoryCluster,Stat} from '../types'
 type ClusterProps = {
 	Title: string
-	Obj: any
+	Obj: Stat
 	HeatMapType: string
-	memory: any
+	memory: MemoryCluster
 	highlightShard: number
 }
 
@@ -59,7 +59,7 @@ function  Cluster({Title, Obj,HeatMapType,memory,highlightShard}:ClusterProps){
 		let popover = produceShardPopover(Obj,Title,i)
 		shardButtons.push(
 			<ShardButton onClick={handleButtonClick} color = {heatmap[i]} popover={popover} isHighlighted={highlightShard===Obj.shards[i]} key={i.toString()} shardIndex = {i}>
-				{Obj.shards[i]}
+				<p>{Obj.shards[i]}</p>
 			</ShardButton>
 		)
 	}

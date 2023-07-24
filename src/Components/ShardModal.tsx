@@ -4,8 +4,9 @@ import Container from 'react-bootstrap/Container'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import StatCard from './StatCard'
-import {useRef,useEffect} from 'react'
+import {useRef,useEffect,useState} from 'react'
 import {Chart,ChartData,ChartOptions,LinearScaleOptions} from 'chart.js/auto'
+import {Stat} from '../types'
 
 const usageData:ChartData = {
     labels: ["Amazon Polly Queries","Google Translate Queries","IVONA Queries"],
@@ -47,7 +48,7 @@ const memoryOptions:ChartOptions = {
 }
 type ShardModalProps = {
     shardindex: number,
-    obj: any,
+    obj: Stat,
     memory: number[],
     show: boolean,
     title: string,
@@ -55,8 +56,10 @@ type ShardModalProps = {
 }
 
 function ShardModal({shardindex,obj: cluster,memory,title,...props}:ShardModalProps) {
-    const memoryChartRef = useRef<any>(null)
-    const usageChartRef = useRef<any>(null)
+    const memoryChartRef = useRef<HTMLCanvasElement | null>(null)
+    const usageChartRef = useRef<HTMLCanvasElement | null>(null)
+    const [memoryChart, setMemoryChart] = useState<Chart | null>(null)
+    const [usageChart, setUsageChart] = useState<Chart | null>(null)
     const x:number[] = []
     useEffect(() => {
 		if(!memoryChartRef.current || !usageChartRef.current) return
@@ -65,33 +68,31 @@ function ShardModal({shardindex,obj: cluster,memory,title,...props}:ShardModalPr
             x[memory.length-i-1]=i*5
         }
         memoryData.labels = x
-		if (!(memoryChartRef.current instanceof Chart)) {
+		if (!(memoryChart)) {
 			memoryData.datasets[0].data = memory;
             (memoryOptions!.scales!.y as LinearScaleOptions).suggestedMin = Math.max(...memory)-(Math.max(...memory)-Math.min(...memory))*20;
 			(memoryOptions!.scales!.y as LinearScaleOptions).suggestedMax = Math.max(...memory)+(Math.max(...memory)-Math.min(...memory))*10
-			memoryChartRef.current = new Chart(memoryChartRef.current, {
+			setMemoryChart(new Chart(memoryChartRef.current, {
 			  type: 'line',
 			  options: memoryOptions,
 			  data: memoryData
-			})
+			}))
 		  }
-          if (!(usageChartRef.current instanceof Chart)) {
+          if (!(usageChart)) {
 			usageData.datasets[0].data = [cluster.pollychars[shardindex],cluster.translatechars[shardindex],cluster.IVONAchars[shardindex]]
-			usageChartRef.current = new Chart(usageChartRef.current, {
+			setUsageChart(new Chart(usageChartRef.current, {
                 type: 'pie',
 			  options: usageOptions,
 			  data: usageData
-			})
+			}))
 		  }
-        const memoryChart = memoryChartRef.current
-        const usageChart = usageChartRef.current  
         memoryData.datasets[0].data.push(memory[memory.length-1])
         memoryData.datasets[0].data.shift()
         usageData.datasets[0].data[0]=cluster.pollychars[shardindex]
         usageData.datasets[0].data[1]=cluster.translatechars[shardindex]
         usageData.datasets[0].data[2]=cluster.IVONAchars[shardindex]
-		memoryChart.update()
-        usageChart.update()
+		memoryChart!.update()
+        usageChart!.update()
 
 	  }, [props.show,memory])
     return (

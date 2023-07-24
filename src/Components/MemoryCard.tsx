@@ -3,7 +3,6 @@ import Button from 'react-bootstrap/Button'
 import Card from 'react-bootstrap/Card'
 import React, { useRef, useEffect, useState } from 'react'
 import {Chart,ChartData,ChartOptions,LinearScaleOptions} from 'chart.js/auto'
- 
 const options:ChartOptions = {
 	responsive:true,
 	animation: {
@@ -41,14 +40,15 @@ const data:ChartData= {
 }
 function  MemoryCard({memory}: {memory:number[]}){
 	const [open, setOpen] = useState(true)
-	const chartRef = useRef<any>(null) 
+	const [chart, setChart] = useState<Chart | null>(null)
+	const chartRef = useRef<HTMLCanvasElement | null>(null) 
 	for(let i = 0;i<memory.length;i++){
 		labels[memory.length-i-1]=i*5
 	 }
 	 data.labels = labels
 	  useEffect(() => {
 		if(memory.length===0) return
-		if (!(chartRef.current instanceof Chart)) {
+		if(!chart && chartRef.current) {
 			/*max and min are used to set the y axis range, so that the graph doesn't look weird when the memory usage is low or high.
 			This maintains a max value that is 20x the difference between the min and max values and a min value that is 10x the difference between the min and max values, allowing
 			the line to sit in the upper 2/3 of the graph
@@ -56,16 +56,15 @@ function  MemoryCard({memory}: {memory:number[]}){
 			(options!.scales!.y as LinearScaleOptions).suggestedMin = Math.max(...memory)-(Math.max(...memory)-Math.min(...memory))*20;
 			(options!.scales!.y as LinearScaleOptions).suggestedMax = Math.max(...memory)+(Math.max(...memory)-Math.min(...memory))*10
 			data.datasets[0].data = memory
-			chartRef.current = new Chart(chartRef.current,{
+			setChart(new Chart(chartRef.current,{
 			  type: 'line',
 			  options: options,
 			  data: data
-			})
+			}))
 		  }
-		const chart = chartRef.current
 		data!.datasets[0]!.data!.push(memory[memory.length-1])
 		data!.datasets[0]!.data!.shift()
-		chart.update()
+		chart!.update()
 	  }, [memory])
 
  return (

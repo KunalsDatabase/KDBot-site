@@ -1,5 +1,5 @@
 import {Memory} from "../types"
-function parseMemoryData(memory:Memory){
+function MemoryPreprocess(memory:Memory){
     const globalMemory = new Array(memory[Object.keys(memory)[0]][0].length).fill(0)
     for(let obj in memory){
         for(let i = 0;i<memory[obj].length;i++){
@@ -14,4 +14,4 @@ function parseMemoryData(memory:Memory){
     return globalMemory
 }
 
-export default parseMemoryData
+export default MemoryPreprocess

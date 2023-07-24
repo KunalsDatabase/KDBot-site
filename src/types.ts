@@ -27,7 +27,9 @@ export type Stat = {
 export type Stats = {
     [key: string]: Stat
   }
+export type MemoryCluster = number[][]
+
 
 export type Memory = {
-    [key: string]: number[][]
+    [key: string]: MemoryCluster
   }
