@@ -15,7 +15,8 @@ type ClusterCardProps = {
 	totalShards: number
 }
 function  ClusterCard({stats,memory,totalShards}:ClusterCardProps){
-	const [open, setOpen] = useState<boolean>(true)
+	const isOpen:boolean = localStorage.getItem('ClusterCardOpen')==='false'?false:true
+	const [open, setOpen] = useState<boolean>(isOpen)
 	const [heatmap, setHeatmap] = useState<string>("online")
 	const [highlightShard, setHighlightShard] = useState(NaN)
 	function handleHeatmapChange(value:string){
@@ -30,7 +31,7 @@ function  ClusterCard({stats,memory,totalShards}:ClusterCardProps){
 	<div className="col px-lg-1">
 		<Card className="text-light bg-dark ">
 			<Card.Header className="text-center">
-				<Button variant = "dark" onClick={()=>setOpen(!open)} className="bg-dark text-white minimize-btn" aria-expanded={open} aria-controls="collapse"><div className ="rectangle"></div></Button>
+				<Button variant = "dark" onClick={()=>{setOpen(!open);open?localStorage.setItem('ClusterCardOpen','false'):localStorage.setItem('ClusterCardOpen','true')}} className="bg-dark text-white minimize-btn" aria-expanded={open} aria-controls="collapse"><div className ="rectangle"></div></Button>
 				Clusters
 			</Card.Header>
 			<Collapse in={open}>

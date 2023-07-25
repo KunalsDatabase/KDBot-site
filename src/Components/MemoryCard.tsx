@@ -39,7 +39,8 @@ const data:ChartData= {
 	}]
 }
 function  MemoryCard({memory}: {memory:number[]}){
-	const [open, setOpen] = useState(true)
+	const isOpen = localStorage.getItem('MemoryCardOpen')==='false'?false:true
+	const [open, setOpen] = useState(isOpen)
 	const [chart, setChart] = useState<Chart | null>(null)
 	const chartRef = useRef<HTMLCanvasElement | null>(null) 
 	for(let i = 0;i<memory.length;i++){
@@ -72,7 +73,7 @@ function  MemoryCard({memory}: {memory:number[]}){
 	<div className= "col-12 px-lg-1">
 		<Card className="text-light bg-dark">
 			<Card.Header className="text-center">
-			<Button variant = "dark" onClick={()=>setOpen(!open)} className="bg-dark text-white minimize-btn" aria-expanded={open} aria-controls="collapse"><div className ="rectangle"></div></Button>
+			<Button variant = "dark" onClick={()=>{setOpen(!open);open?localStorage.setItem('MemoryCardOpen','false'):localStorage.setItem('MemoryCardOpen','true')}} className="bg-dark text-white minimize-btn" aria-expanded={open} aria-controls="collapse"><div className ="rectangle"></div></Button>
 				Live memory usage
 			</Card.Header>
 			<Collapse in={open}>
