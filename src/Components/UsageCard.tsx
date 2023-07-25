@@ -23,22 +23,24 @@ type UsageCardProps = {
 }
 
 function  UsageCard({IVONAchars,translatechars,pollychars}:UsageCardProps){
-	const chartRef = useRef<HTMLCanvasElement | null>(null) 
-	const [chart, setChart] = useState<Chart | null>(null)
+	const canvasRef = useRef<HTMLCanvasElement | null>(null) 
+	const chartRef = useRef<Chart | null>(null) 
+
 	useEffect(() => {
-		if(!chartRef.current) return
-		if(!(chart)) {
+		if(!canvasRef.current) return
+		if(!chartRef.current) {
 			data.datasets[0].data = [pollychars,translatechars,IVONAchars]
-			setChart(new Chart(chartRef.current, {
+			chartRef.current = new Chart(canvasRef.current, {
                 type: 'pie',
 			  options: options,
 			  data: data
-			}))
+			})
+			return
 		}
         data.datasets[0].data[0]=pollychars
         data.datasets[0].data[1]=translatechars
         data.datasets[0].data[2]=IVONAchars
-        chart!.update()
+        chartRef.current!.update()
 	},[IVONAchars,translatechars,pollychars])
 
 	return (
@@ -47,7 +49,7 @@ function  UsageCard({IVONAchars,translatechars,pollychars}:UsageCardProps){
 				<Card.Header>Usage by service</Card.Header>
 				<Card.Body>
 				<Card.Text className="usagecard">
-					<canvas id="pieChart" ref={chartRef}></canvas>
+					<canvas id="pieChart" ref={canvasRef}></canvas>
 				</Card.Text>
 				</Card.Body>
 			</Card>

@@ -61,6 +61,7 @@ function  MemoryCard({memory}: {memory:number[]}){
 			  options: options,
 			  data: data
 			}))
+			return
 		  }
 		data!.datasets[0]!.data!.push(memory[memory.length-1])
 		data!.datasets[0]!.data!.shift()

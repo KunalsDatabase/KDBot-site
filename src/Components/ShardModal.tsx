@@ -56,44 +56,51 @@ type ShardModalProps = {
 }
 
 function ShardModal({shardindex,obj: cluster,memory,title,...props}:ShardModalProps) {
-    const memoryChartRef = useRef<HTMLCanvasElement | null>(null)
-    const usageChartRef = useRef<HTMLCanvasElement | null>(null)
-    const [memoryChart, setMemoryChart] = useState<Chart | null>(null)
-    const [usageChart, setUsageChart] = useState<Chart | null>(null)
+    const usageCanvasRef = useRef<HTMLCanvasElement | null>(null)
+    const usageChartRef = useRef<Chart | null>(null)
+    const memoryCanvasRef = useRef<HTMLCanvasElement | null>(null) 
+	const memoryChartRef = useRef<Chart | null>(null) 
     const x:number[] = []
     useEffect(() => {
-		if(!memoryChartRef.current || !usageChartRef.current) return
+        //we need to destroy the chart and the reference to it when the modal is closed (this component doesn't unmount when the modal closes)
+        if (usageChartRef.current && memoryChartRef.current && props.show===false) {
+            usageChartRef.current.destroy()
+            usageChartRef.current = null
+            memoryChartRef.current.destroy()
+            memoryChartRef.current = null
+            return
+          }
+		if(!memoryCanvasRef.current || !usageCanvasRef.current) return
         if(!memory) return
         for(var i = 0;i<memory.length;i++){
             x[memory.length-i-1]=i*5
         }
         memoryData.labels = x
-		if (!(memoryChart)) {
+		if (!(memoryChartRef.current)) {
 			memoryData.datasets[0].data = memory;
             (memoryOptions!.scales!.y as LinearScaleOptions).suggestedMin = Math.max(...memory)-(Math.max(...memory)-Math.min(...memory))*20;
 			(memoryOptions!.scales!.y as LinearScaleOptions).suggestedMax = Math.max(...memory)+(Math.max(...memory)-Math.min(...memory))*10
-			setMemoryChart(new Chart(memoryChartRef.current, {
+			memoryChartRef.current = new Chart(memoryCanvasRef.current, {
 			  type: 'line',
 			  options: memoryOptions,
 			  data: memoryData
-			}))
+			})
 		  }
-          if (!(usageChart)) {
+          if (!(usageChartRef.current)) {
 			usageData.datasets[0].data = [cluster.pollychars[shardindex],cluster.translatechars[shardindex],cluster.IVONAchars[shardindex]]
-			setUsageChart(new Chart(usageChartRef.current, {
+			usageChartRef.current = new Chart(usageCanvasRef.current, {
                 type: 'pie',
 			  options: usageOptions,
 			  data: usageData
-			}))
+			})
 		  }
         memoryData.datasets[0].data.push(memory[memory.length-1])
         memoryData.datasets[0].data.shift()
         usageData.datasets[0].data[0]=cluster.pollychars[shardindex]
         usageData.datasets[0].data[1]=cluster.translatechars[shardindex]
         usageData.datasets[0].data[2]=cluster.IVONAchars[shardindex]
-		memoryChart!.update()
-        usageChart!.update()
-
+		memoryChartRef.current!.update()
+        usageChartRef.current!.update()
 	  }, [props.show,memory])
     return (
       <Modal
@@ -124,10 +131,10 @@ function ShardModal({shardindex,obj: cluster,memory,title,...props}:ShardModalPr
                 </Row>
                 <Row>
                     <Col xxl={8}>
-                        <canvas id="shardMemoryChart" className = "mt-3" ref={memoryChartRef}></canvas>
+                        <canvas id="shardMemoryChart" className = "mt-3" ref={memoryCanvasRef}></canvas>
                     </Col>
                     <Col xxl={4}>
-                        <canvas id="shardUsageChart" className = "mt-3" ref={usageChartRef}></canvas>
+                        <canvas id="shardUsageChart" className = "mt-3" ref={usageCanvasRef}></canvas>
                     </Col>
                 </Row>
             </Container>
