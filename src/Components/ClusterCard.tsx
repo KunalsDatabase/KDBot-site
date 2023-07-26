@@ -25,7 +25,7 @@ function  ClusterCard({stats,memory,totalShards}:ClusterCardProps){
 	function handleSubmit(e:React.FormEvent<HTMLFormElement>){
 		e.preventDefault()
 		const inputValue = (e.currentTarget[0] as HTMLInputElement).value
-		inputValue.length < 18 ? setHighlightShard(NaN) : setHighlightShard((Number(inputValue) >> 22) % totalShards)	
+		inputValue.length < 18 ? setHighlightShard(NaN) : setHighlightShard(((Number(inputValue) >> 22) % totalShards+totalShards) % totalShards)
 	}
 		return (
 	<div className="col px-lg-1">
@@ -50,7 +50,7 @@ function  ClusterCard({stats,memory,totalShards}:ClusterCardProps){
 					</Row>
 					<Row>
 					<Col xl={4} md={6}>
-						<Form onSubmit={handleSubmit}>
+						<Form onChange={handleSubmit} onSubmit={handleSubmit}>
 							<Form.Group className="mb-3" controlId="formGroupGuild">
 								<Form.Label>Enter guild ID to find your shard</Form.Label>
 								<Form.Control className = "bg-dark text-white" type="number" placeholder="Guild ID" />

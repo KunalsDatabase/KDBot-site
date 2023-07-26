@@ -56,7 +56,7 @@ function  Statistics(){
         },[])
  return (
     <Container fluid>
-      {errorShow && <Alert variant="danger" onClose={() => setErrorShow(false)} dismissible>
+      {errorShow && <Alert variant="danger" className= "mt-2" onClose={() => setErrorShow(false)} dismissible>
         <Alert.Heading>{errorMessage.heading}</Alert.Heading>
         <p>
             {errorMessage.message}
