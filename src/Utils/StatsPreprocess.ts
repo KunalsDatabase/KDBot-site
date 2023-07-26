@@ -1,5 +1,5 @@
 import { Aggregates,Stats,Stat} from "../types"
-function StatsPreprocess(stats:Stats) {
+function StatsPreprocess(stats:Stats):Aggregates{
     const pollychars = getAggregate(stats,"pollychars")
     const translatechars = getAggregate(stats,"translatechars")
     const IVONAchars = getAggregate(stats,"IVONAchars")
@@ -18,7 +18,7 @@ function StatsPreprocess(stats:Stats) {
     }
     return aggregates
 }
-function getAggregate(data:Stats,property:keyof Stat,avg:boolean=false){
+function getAggregate(data:Stats,property:keyof Stat,avg:boolean=false):number{
     let temp = 0
     let n = 0
     for(let obj in data){

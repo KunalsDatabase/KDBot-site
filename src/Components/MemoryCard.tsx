@@ -40,14 +40,14 @@ const data:ChartData= {
 }
 function  MemoryCard({memory}: {memory:number[]}){
 	const isOpen = localStorage.getItem('MemoryCardOpen')==='false'?false:true
-	const [open, setOpen] = useState(isOpen)
+	const [open, setOpen] = useState<boolean>(isOpen)
 	const [chart, setChart] = useState<Chart | null>(null)
 	const chartRef = useRef<HTMLCanvasElement | null>(null) 
 	for(let i = 0;i<memory.length;i++){
 		labels[memory.length-i-1]=i*5
-	 }
-	 data.labels = labels
-	  useEffect(() => {
+	}
+	data.labels = labels
+	useEffect(() => {
 		if(memory.length===0) return
 		if(!chart && chartRef.current) {
 			/*max and min are used to set the y axis range, so that the graph doesn't look weird when the memory usage is low or high.
@@ -63,11 +63,11 @@ function  MemoryCard({memory}: {memory:number[]}){
 			  data: data
 			}))
 			return
-		  }
+		}
 		data!.datasets[0]!.data!.push(memory[memory.length-1])
 		data!.datasets[0]!.data!.shift()
 		chart!.update()
-	  }, [memory])
+	}, [memory])
 
  return (
 	<div className= "col-12 px-lg-1">

@@ -11,6 +11,7 @@ type ShardButtonProps = {
 }
 function ShardButton({popover,shardIndex,color,children,isHighlighted,onClick}:ShardButtonProps){
 	let ref = useRef<HTMLButtonElement>(null)
+	
 	useEffect(()=>{
 		if(isHighlighted && ref.current){
 			ref.current.scrollIntoView({behavior: "smooth", block: "center", inline: "center"})
@@ -18,6 +19,7 @@ function ShardButton({popover,shardIndex,color,children,isHighlighted,onClick}:S
 		}
 		
 	},[isHighlighted])
+
 	return(
 	<OverlayTrigger overlay={popover} placement = "top">
 			<Button

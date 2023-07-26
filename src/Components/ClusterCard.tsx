@@ -18,7 +18,7 @@ function  ClusterCard({stats,memory,totalShards}:ClusterCardProps){
 	const isOpen:boolean = localStorage.getItem('ClusterCardOpen')==='false'?false:true
 	const [open, setOpen] = useState<boolean>(isOpen)
 	const [heatmap, setHeatmap] = useState<string>("online")
-	const [highlightShard, setHighlightShard] = useState(NaN)
+	const [highlightShard, setHighlightShard] = useState<number>(NaN)
 	function handleHeatmapChange(value:string){
 		setHeatmap(value)
 	}

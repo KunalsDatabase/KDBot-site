@@ -19,7 +19,7 @@ function  Statistics(){
     const [memory,setMemory] = useState<Memory | null>(null)
     const [globalMemory,setGlobalMemory] = useState<number[]>([])
     const [aggregates,setAggregates] = useState<Aggregates | null>(null)
-    const [errorMessage,setErrorMessage] = useState({heading:"",message:""})
+    const [errorMessage,setErrorMessage] = useState<Error>({heading:"",message:""})
     const [errorShow,setErrorShow] = useState<boolean>(false)
 
     function handleError(e:Error){

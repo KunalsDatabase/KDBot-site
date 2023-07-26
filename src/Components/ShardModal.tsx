@@ -69,7 +69,7 @@ function ShardModal({shardindex,obj: cluster,memory,title,...props}:ShardModalPr
             memoryChartRef.current.destroy()
             memoryChartRef.current = null
             return
-          }
+        }
 		if(!memoryCanvasRef.current || !usageCanvasRef.current) return
         if(!memory) return
         for(var i = 0;i<memory.length;i++){
@@ -81,19 +81,19 @@ function ShardModal({shardindex,obj: cluster,memory,title,...props}:ShardModalPr
             (memoryOptions!.scales!.y as LinearScaleOptions).suggestedMin = Math.max(...memory)-(Math.max(...memory)-Math.min(...memory))*20;
 			(memoryOptions!.scales!.y as LinearScaleOptions).suggestedMax = Math.max(...memory)+(Math.max(...memory)-Math.min(...memory))*10
 			memoryChartRef.current = new Chart(memoryCanvasRef.current, {
-			  type: 'line',
-			  options: memoryOptions,
-			  data: memoryData
+			    type: 'line',
+		        options: memoryOptions,
+			    data: memoryData
 			})
 		  }
-          if (!(usageChartRef.current)) {
+        if(!(usageChartRef.current)) {
 			usageData.datasets[0].data = [cluster.pollychars[shardindex],cluster.translatechars[shardindex],cluster.IVONAchars[shardindex]]
 			usageChartRef.current = new Chart(usageCanvasRef.current, {
                 type: 'pie',
-			  options: usageOptions,
-			  data: usageData
+			    options: usageOptions,
+			    data: usageData
 			})
-		  }
+		}
         memoryData.datasets[0].data.push(memory[memory.length-1])
         memoryData.datasets[0].data.shift()
         usageData.datasets[0].data[0]=cluster.pollychars[shardindex]
