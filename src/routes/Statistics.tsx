@@ -32,7 +32,7 @@ function  Statistics(){
     useEffect(()=>{
             async function getData(){
                 try{
-                    let [statsResponse,memoryResponse] = await Promise.all([fetch("http://kdbase.com/kdbot/botapi.php?botinfo"),fetch("http://kdbase.com/kdbot/botapi.php?memory")])
+                    let [statsResponse,memoryResponse] = await Promise.all([fetch("https://kdbase.com/kdbot/botapi.php?botinfo"),fetch("https://kdbase.com/kdbot/botapi.php?memory")])
                     let [statsData,memoryData] = await Promise.all([statsResponse.json(),memoryResponse.json()])
                     Object.entries(statsData).forEach(function([key, value]) {
                         if(Object.keys(statsData[key]).length === 0){
