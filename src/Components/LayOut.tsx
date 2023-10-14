@@ -13,6 +13,7 @@ function  LayOut(){
             <Navbar.Collapse className = "justify-content-center">
                 <Nav className="nav-pills">
                     <NavLink className="nav-link" to="statistics">Statistics</NavLink>
+                    <NavLink className="nav-link" to="dashboard">Dashboard</NavLink>
                     <NavLink className="nav-link" to="premium">Premium</NavLink>
                     <NavDropdown title="External Links" id="basic-nav-dropdown">
                         <NavDropdown.Item href="https://discordbots.org/bot/414925323197612032" rel="noreferrer">⧉ Bot Page</NavDropdown.Item>

@@ -6,6 +6,7 @@ import LayOut from './Components/LayOut'
 import {Suspense} from 'react'
 const Premium = React.lazy(() => import('./routes/Premium'))
 const Statistics = React.lazy(() => import('./routes/Statistics'))
+const Dashboard = React.lazy(() => import('./routes/Dashboard'))
 const StatisticsLazy = <Suspense fallback={<div>Loading...</div>}><Statistics/></Suspense>
 const router = createBrowserRouter([
   {
@@ -27,6 +28,13 @@ const router = createBrowserRouter([
         element:
         <Suspense fallback={<div>Loading...</div>}>
           <Premium/>
+        </Suspense>,
+      },
+      {
+        path: "dashboard",
+        element:
+        <Suspense fallback={<div>Loading...</div>}>
+          <Dashboard/>
         </Suspense>,
       },
       {
