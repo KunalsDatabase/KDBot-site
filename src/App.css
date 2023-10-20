@@ -110,3 +110,23 @@ input[type=number] {
   -moz-appearance: textfield;
   appearance: textfield;
 }
+.nav-tabs .nav-link {
+  color: rgb(161, 161, 161);
+}
+.nav-tabs .nav-link:focus, .nav-tabs .nav-link:hover{
+  border-color: var(--bs-secondary);
+}
+.nav-tabs {
+  border-bottom: 0px;
+  font-weight: bold;
+}
+.nav-tabs .nav-link.active {
+  color:white;
+  font-weight: bold;
+  background-color: var(--bs-dark);
+  border-color: var(--bs-dark);
+}
+.dashboard-tab-content{
+  background-color: var(--bs-dark);
+  border-radius:0px 0px 5px 5px;
+}
