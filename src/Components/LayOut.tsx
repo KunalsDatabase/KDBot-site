@@ -22,7 +22,10 @@ function  LayOut(){
                     </NavDropdown>
                 </Nav>
  
-            <Button variant="primary" href="oauthlinkhere" className="me-3">Login with Discord</Button>
+            <Button href="oauthlinkhere" className="me-3 discord-color text-white">
+            <img src="/icons/icon_clyde_white_RGB.svg" height="20px" className ="me-2" alt="Discord logo"/>
+                Login with Discord
+                </Button>
 
             </Navbar.Collapse>
         </Navbar>

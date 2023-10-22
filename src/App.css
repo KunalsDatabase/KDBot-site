@@ -133,3 +133,6 @@ input[type=number] {
   background-color: var(--bs-dark);
   border-radius:0px 0px 5px 5px;
 }
+.discord-color, .discord-color:hover{
+  background-color: #5865F2;
+}
