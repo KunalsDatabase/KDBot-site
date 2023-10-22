@@ -10,6 +10,7 @@ import StatsPreprocess from '../Utils/StatsPreprocess'
 import MemoryPreprocess from '../Utils/MemoryPreprocess'
 import Alert from 'react-bootstrap/Alert'
 import { Aggregates,Stats,Memory} from "../types"
+import {API_CONFIG} from '../config'
 type Error = {
     heading: string
     message: string
@@ -32,7 +33,7 @@ function  Statistics(){
     useEffect(()=>{
             async function getData(){
                 try{
-                    let [statsResponse,memoryResponse] = await Promise.all([fetch("https://kdbase.com/kdbot/api/v1/botinfo"),fetch("https://kdbase.com/kdbot/api/v1/memory")])
+                    let [statsResponse,memoryResponse] = await Promise.all([fetch(`${API_CONFIG.BASE_URL}${API_CONFIG.ENDPOINTS.BOT_INFO}`),fetch(`${API_CONFIG.BASE_URL}${API_CONFIG.ENDPOINTS.MEMORY}`)])
                     let [statsData,memoryData] = await Promise.all([statsResponse.json(),memoryResponse.json()])
                     Object.entries(statsData).forEach(function([key, value]) {
                         if(Object.keys(statsData[key]).length === 0){
