@@ -33,3 +33,10 @@ export type MemoryCluster = number[][]
 export type Memory = {
     [key: string]: MemoryCluster
   }
+export type AuthContextType = {
+  isLoggedIn: boolean
+  setIsLoggedIn: (isLoggedIn: boolean) => void
+}
+export type AuthProviderProps = {
+  children: React.ReactNode
+}

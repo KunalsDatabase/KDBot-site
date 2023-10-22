@@ -1,9 +1,11 @@
 import { NavLink, Outlet } from "react-router-dom"
+import {useAuth} from '../Hooks/useAuth'
 import Nav from 'react-bootstrap/Nav'
 import Navbar from 'react-bootstrap/Navbar'
 import NavDropdown from 'react-bootstrap/NavDropdown'
 import Button from 'react-bootstrap/Button'
 function  LayOut(){
+    const auth = useAuth()
  return (
     <>
         <Navbar variant="dark" collapseOnSelect expand="lg">
@@ -21,8 +23,7 @@ function  LayOut(){
                         <NavDropdown.Item href="https://discord.gg/xMh2YTb" rel="noreferrer">⧉ Support Server</NavDropdown.Item>
                     </NavDropdown>
                 </Nav>
- 
-            <Button href="oauthlinkhere" className="me-3 discord-color text-white">
+            <Button href="#" onClick={()=>{auth.setIsLoggedIn(true)}} className="me-3 discord-color text-white">
             <img src="/icons/icon_clyde_white_RGB.svg" height="20px" className ="me-2" alt="Discord logo"/>
                 Login with Discord
                 </Button>
