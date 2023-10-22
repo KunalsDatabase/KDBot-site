@@ -9,8 +9,8 @@
   background-color: rgb(30,30,40)
 }
  html,body{ background-color: rgb(30,30,40) !important;
+  height:100%;
 display: flex;
-min-height: 100vh;
 flex-direction: column;
 }
 a{
@@ -42,8 +42,10 @@ font-size:11px}
 }
 .inner-card{background-color:rgba(0,0,0,0.07)}
 
-content{
+.content{
   flex: 1;
+  min-height:90vh;
+
 }
 @media (min-width:992px) {
   .container-fluid { width: 75% !important;}
@@ -115,6 +117,7 @@ input[type=number] {
 }
 .nav-tabs .nav-link:focus, .nav-tabs .nav-link:hover{
   border-color: var(--bs-secondary);
+  border-bottom: 0px;
 }
 .nav-tabs {
   border-bottom: 0px;
