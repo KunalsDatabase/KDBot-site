@@ -1,14 +1,15 @@
 export const API_CONFIG = {
-    BASE_URL: 'https://kdbase.com/kdbot/api/v1',
+    BASE_URL: process.env.REACT_APP_API_BASE_URL,
     ENDPOINTS: {
       BOT_INFO: '/botinfo',
       MEMORY: '/memory'
     }
   }
+  
 export const OAUTH_CONFIG = {
     BASE_URL: "https://discord.com/api/oauth2/authorize",
     CLIENT_ID: "414925323197612032",
-    REDIRECT_URI: "https://kdbase.com/kdbot/api/v1/callback",
+    REDIRECT_URI: API_CONFIG.BASE_URL+"/callback",
     RESPONSE_TYPE: "code",
     SCOPE: ["identify", "guilds"]
 }
