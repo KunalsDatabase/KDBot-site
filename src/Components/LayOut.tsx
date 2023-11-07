@@ -3,6 +3,7 @@ import {useAuth} from '../Hooks/useAuth'
 import Nav from 'react-bootstrap/Nav'
 import Navbar from 'react-bootstrap/Navbar'
 import NavDropdown from 'react-bootstrap/NavDropdown'
+import Spinner from 'react-bootstrap/Spinner'
 import Button from 'react-bootstrap/Button'
 import {getOAuthURL} from '../config'
 function  LayOut(){
@@ -24,11 +25,17 @@ function  LayOut(){
                         <NavDropdown.Item href="https://discord.gg/xMh2YTb" rel="noreferrer">⧉ Support Server</NavDropdown.Item>
                     </NavDropdown>
                 </Nav>
-            <Button href={getOAuthURL()} onClick={()=>{auth.setIsLoggedIn(true)}} className="me-3 discord-color text-white">
-            <img src="/icons/icon_clyde_white_RGB.svg" height="20px" className ="me-2" alt="Discord logo"/>
-                Login with Discord
+            {auth.isLoading?(
+                <Spinner animation="border" variant="light" />
+            ):
+            auth.user?
+            auth.user.username
+            :(
+                <Button href={getOAuthURL()} className="me-3 discord-color text-white">
+                    <img src="/icons/icon_clyde_white_RGB.svg" height="20px" className ="me-2" alt="Discord logo"/>
+                    Login with Discord
                 </Button>
-
+            )}
             </Navbar.Collapse>
         </Navbar>
         <div className="content">

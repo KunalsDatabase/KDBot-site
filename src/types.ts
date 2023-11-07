@@ -34,8 +34,8 @@ export type Memory = {
     [key: string]: MemoryCluster
   }
 export type AuthContextType = {
-  isLoggedIn: boolean
-  setIsLoggedIn: (isLoggedIn: boolean) => void
+  isLoading: boolean
+  user: any | null
 }
 export type AuthProviderProps = {
   children: React.ReactNode
