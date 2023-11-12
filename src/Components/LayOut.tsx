@@ -21,7 +21,7 @@ function  LayOut(){
                     <NavLink className="nav-link" to="statistics">Statistics</NavLink>
                     <NavLink className="nav-link" to="dashboard">Dashboard</NavLink>
                     <NavLink className="nav-link" to="premium">Premium</NavLink>
-                    <NavDropdown title="External Links" id="basic-nav-dropdown">
+                    <NavDropdown menuVariant="dark" title="External Links" id="basic-nav-dropdown">
                         <NavDropdown.Item href="https://discordbots.org/bot/414925323197612032" rel="noreferrer">⧉ Bot Page</NavDropdown.Item>
                         <NavDropdown.Item href="https://discord.gg/xMh2YTb" rel="noreferrer">⧉ Support Server</NavDropdown.Item>
                     </NavDropdown>
@@ -38,7 +38,7 @@ function  LayOut(){
                         <Dropdown.Toggle className = "ms-3" bsPrefix="signin-toggle" variant="dark" id="dropdown-signin">
                             <img className="rounded-circle" style={{width: "40px", height: "40px"}} src={`https://cdn.discordapp.com/avatars/${auth.user.id}/${auth.user.avatar}.jpeg`} alt="avatar"/>
                         </Dropdown.Toggle>
-                        <Dropdown.Menu>
+                        <Dropdown.Menu variant="dark">
                             <Dropdown.Item href={process.env.REACT_APP_API_BASE_URL+"/logout"}>Log out (this device)</Dropdown.Item>
                             <Dropdown.Item href={process.env.REACT_APP_API_BASE_URL+"/logoutAll"}>Log out (all devices)</Dropdown.Item>
                         </Dropdown.Menu>
